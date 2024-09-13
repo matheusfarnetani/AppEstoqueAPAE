@@ -25,7 +25,7 @@ class UsersController {
     }
   }
 
-  async findUser(req, res) {
+  async findById(req, res) {
     let id = parseInt(req.params.id);
     if (!Number.isInteger(id)) {
       return res
@@ -45,7 +45,7 @@ class UsersController {
     }
   }
 
-  async remove(req, res) {
+  async delete(req, res) {
     let id = parseInt(req.params.id);
     if (!Number.isInteger(id)) {
       return res
@@ -63,7 +63,7 @@ class UsersController {
     }
   }
 
-  async editUser(req, res) {
+  async update(req, res) {
     let id = parseInt(req.params.id);
     let { username, email, funcao } = req.body;
     if (!Number.isInteger(id)) {
