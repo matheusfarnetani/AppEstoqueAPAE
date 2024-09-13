@@ -5,8 +5,10 @@ var jwt = require("jsonwebtoken");
 
 class UsersController {
   async create(req, res) {
+    const user_id = req.user_id; // Obter o user_id do middleware
     let { username, email, password, funcao } = req.body;
-    let result = await User.new(username, email, password, funcao);
+
+    let result = await User.new(username, email, password, funcao, user_id);
     if (result.status) {
       res
         .status(200)
@@ -46,39 +48,39 @@ class UsersController {
   }
 
   async delete(req, res) {
-    let id = parseInt(req.params.id);
+    const user_id = req.user_id; // Obter o user_id do middleware
+    const id = parseInt(req.params.id);
+
     if (!Number.isInteger(id)) {
       return res
         .status(400)
         .json({ success: false, message: "Parâmetro inválido." });
+    }
+
+    let result = await User.delete(id, user_id);
+    if (result.status) {
+      res.status(200).json({ success: result.status, message: result.message });
     } else {
-      let result = await User.delete(id);
-      if (result.status) {
-        res
-          .status(200)
-          .json({ success: result.status, message: result.message });
-      } else {
-        res.status(406).json({ success: result.status, message: result.err });
-      }
+      res.status(406).json({ success: result.status, message: result.err });
     }
   }
 
   async update(req, res) {
-    let id = parseInt(req.params.id);
-    let { username, email, funcao } = req.body;
+    const user_id = req.user_id; // Obter o user_id do middleware
+    const id = parseInt(req.params.id);
+    const { username, email, funcao } = req.body;
+
     if (!Number.isInteger(id)) {
       return res
         .status(400)
         .json({ success: false, message: "Parâmetro inválido." });
+    }
+
+    let result = await User.update(id, username, email, funcao, user_id);
+    if (result.status) {
+      res.status(200).json({ success: result.status, message: result.message });
     } else {
-      let result = await User.update(id, username, email, funcao);
-      if (result.status) {
-        res
-          .status(200)
-          .json({ success: result.status, message: result.message });
-      } else {
-        res.status(406).json({ success: result.status, message: result.err });
-      }
+      res.status(406).json({ success: result.status, message: result.err });
     }
   }
 
@@ -113,7 +115,11 @@ class UsersController {
       }
 
       let token = jwt.sign(
-        { email: user.values.email, funcao: user.values.funcao },
+        {
+          id: user.values.id,
+          email: user.values.email,
+          funcao: user.values.funcao,
+        },
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );

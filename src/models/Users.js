@@ -2,7 +2,15 @@ const knex = require("../data/connection");
 const bcrypt = require("bcryptjs");
 
 class User {
-  async new(username, email, password, funcao) {
+  // Define a variável de sessão @user_id no MySQL
+  async setUserSession(user_id) {
+    await knex.raw("SET @user_id = ?", [user_id]);
+  }
+
+  async new(username, email, password, funcao, user_id) {
+    // Define a variável de sessão antes da operação
+    await this.setUserSession(user_id);
+
     let salt = bcrypt.genSaltSync(10);
     let hashedPassword = bcrypt.hashSync(password, salt);
 
@@ -61,7 +69,10 @@ class User {
     }
   }
 
-  async delete(id) {
+  async delete(id, user_id) {
+    // Define a variável de sessão antes da operação
+    await this.setUserSession(user_id);
+
     let user = await this.findById(id);
 
     if (user.status) {
@@ -79,7 +90,10 @@ class User {
     }
   }
 
-  async update(id, username, email, funcao) {
+  async update(id, username, email, funcao, user_id) {
+    // Define a variável de sessão antes da operação
+    await this.setUserSession(user_id);
+
     let user = await this.findById(id);
 
     if (user.status) {

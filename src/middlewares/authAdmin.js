@@ -29,6 +29,8 @@ module.exports = function (req, res, next) {
 
     // Verifica se a função do usuário é "administrador"
     if (decoded.funcao === "administrador") {
+      // Armazena o user_id na requisição para uso futuro
+      req.user_id = decoded.id;
       return next(); // Usuário autorizado, segue para a próxima função
     } else {
       return res.status(403).json({
