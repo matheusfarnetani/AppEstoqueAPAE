@@ -51,7 +51,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`pessoas` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tipo_pessoa` TINYINT(1) NOT NULL,
+  `tipo_pessoa` TINYINT(1) NOT NULL COMMENT '0 = Pessoa Fisica\n1 = Pessoa Juridica',
   `nome` VARCHAR(150) NOT NULL,
   `documento` CHAR(14) NOT NULL,
   `data_nascimento` DATE NOT NULL,
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`pessoa_has_telefone` (
   CONSTRAINT `fk_pessoa_fisica_has_telefone_pessoa_fisica1`
     FOREIGN KEY (`pessoa_id`)
     REFERENCES `db_apae_estoque`.`pessoas` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pessoa_fisica_has_telefone_telefone1`
     FOREIGN KEY (`telefone_id`)
@@ -490,8 +490,6 @@ CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`log_pessoas_content` (
   `modificado_por` INT NOT NULL,
   `data_modificacao` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  UNIQUE INDEX `documento_UNIQUE` (`documento` ASC) VISIBLE,
   INDEX `fk_log_pessoas_content_log_pessoas_main1_idx` (`log_pessoas_main_pessoas_id` ASC) VISIBLE,
   CONSTRAINT `fk_log_pessoas_content_log_pessoas_main1`
     FOREIGN KEY (`log_pessoas_main_pessoas_id`)
@@ -1010,9 +1008,29 @@ CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_insumos_vencidos_descartados`
 CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_pessoas_doacoes` (`nome_pessoa` INT, `tipo_pessoa` INT, `numero_doacoes` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `db_apae_estoque`.`view1`
+-- Placeholder table for view `db_apae_estoque`.`view_estoque_saida`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view1` (`id` INT);
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_estoque_saida` (`nome_insumo` INT, `quantidade_total` INT, `unidade_medida` INT, `data_saida` INT, `observacao` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `db_apae_estoque`.`view_doacoes_pessoas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_doacoes_pessoas` (`doacao_id` INT, `pessoas_id` INT, `descricao` INT, `data_doacao` INT, `pessoa_nome` INT, `pessoa_email` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `db_apae_estoque`.`view_pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_pedidos` (`pedido_id` INT, `usuarios_id` INT, `pessoas_id` INT, `descricao` INT, `data_pedido` INT, `pessoa_nome` INT, `usuario_nome` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `db_apae_estoque`.`view_doacoes_by_pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_doacoes_by_pedido` (`pedidos_id` INT, `doacao_id` INT, `doacao_descricao` INT, `data_doacao` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `db_apae_estoque`.`view_pedidos_by_doacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_pedidos_by_doacao` (`doacoes_id` INT, `pedido_id` INT, `pedido_descricao` INT, `data_pedido` INT);
 
 -- -----------------------------------------------------
 -- procedure proc_inserir_estoque_entrada
@@ -1490,12 +1508,10 @@ GROUP BY
     p.nome, p.tipo_pessoa;
 
 -- -----------------------------------------------------
--- View `db_apae_estoque`.`view1`
+-- View `db_apae_estoque`.`view_estoque_saida`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `db_apae_estoque`.`view1`;
+DROP TABLE IF EXISTS `db_apae_estoque`.`view_estoque_saida`;
 USE `db_apae_estoque`;
-USE `db_apae_estoque`;
-
 CREATE OR REPLACE VIEW `view_estoque_saida` AS
 SELECT 
     i.nome AS `nome_insumo`,
@@ -1511,6 +1527,77 @@ JOIN
     `unidades_medida` um ON es.unidades_medida_id = um.id
 GROUP BY 
     i.nome, um.nome, es.data_saida, es.observacao;
+
+-- -----------------------------------------------------
+-- View `db_apae_estoque`.`view_doacoes_pessoas`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `db_apae_estoque`.`view_doacoes_pessoas`;
+USE `db_apae_estoque`;
+CREATE OR REPLACE VIEW view_doacoes_pessoas AS
+SELECT
+    doacoes.id AS doacao_id,
+    doacoes.pessoas_id,
+    doacoes.descricao,
+    doacoes.data_doacao,
+    pessoas.nome AS pessoa_nome,
+    pessoas.email AS pessoa_email
+FROM
+    doacoes
+JOIN
+    pessoas ON doacoes.pessoas_id = pessoas.id;
+
+-- -----------------------------------------------------
+-- View `db_apae_estoque`.`view_pedidos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `db_apae_estoque`.`view_pedidos`;
+USE `db_apae_estoque`;
+CREATE OR REPLACE VIEW view_pedidos AS
+SELECT
+    pedidos.id AS pedido_id,
+    pedidos.usuarios_id,
+    pedidos.pessoas_id,
+    pedidos.descricao,
+    pedidos.data_pedido,
+    pessoas.nome AS pessoa_nome,
+    usuarios.username AS usuario_nome
+FROM
+    pedidos
+JOIN
+    pessoas ON pedidos.pessoas_id = pessoas.id
+JOIN
+    usuarios ON pedidos.usuarios_id = usuarios.id;
+
+-- -----------------------------------------------------
+-- View `db_apae_estoque`.`view_doacoes_by_pedido`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `db_apae_estoque`.`view_doacoes_by_pedido`;
+USE `db_apae_estoque`;
+CREATE OR REPLACE VIEW view_doacoes_by_pedido AS
+SELECT
+  doacoes_has_pedidos.pedidos_id,
+  doacoes.id AS doacao_id,
+  doacoes.descricao AS doacao_descricao,
+  doacoes.data_doacao
+FROM
+  doacoes
+JOIN
+  doacoes_has_pedidos ON doacoes.id = doacoes_has_pedidos.doacoes_id;
+
+-- -----------------------------------------------------
+-- View `db_apae_estoque`.`view_pedidos_by_doacao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `db_apae_estoque`.`view_pedidos_by_doacao`;
+USE `db_apae_estoque`;
+CREATE OR REPLACE VIEW view_pedidos_by_doacao AS
+SELECT
+  doacoes_has_pedidos.doacoes_id,
+  pedidos.id AS pedido_id,
+  pedidos.descricao AS pedido_descricao,
+  pedidos.data_pedido
+FROM
+  pedidos
+JOIN
+  doacoes_has_pedidos ON pedidos.id = doacoes_has_pedidos.pedidos_id;
 USE `db_apae_estoque`;
 
 DELIMITER $$

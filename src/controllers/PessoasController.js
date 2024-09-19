@@ -24,13 +24,11 @@ class PessoasController {
     );
 
     if (result.status) {
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Pessoa criada com sucesso!",
-          id: result.id,
-        });
+      res.status(200).json({
+        success: true,
+        message: "Pessoa criada com sucesso!",
+        id: result.id,
+      });
     } else {
       res.status(400).json({ success: false, message: result.err });
     }
@@ -102,6 +100,19 @@ class PessoasController {
       res.status(200).json({ success: true, message: result.message });
     } else {
       res.status(404).json({ success: false, message: result.message });
+    }
+  }
+
+  // Get all details of a pessoa, including endereco and telefones
+  async getDetails(req, res) {
+    const { id } = req.params;
+
+    const result = await Pessoa.getPessoaWithDetails(id);
+
+    if (result.status) {
+      return res.status(200).json({ success: true, details: result });
+    } else {
+      return res.status(404).json({ success: false, message: result.message });
     }
   }
 }

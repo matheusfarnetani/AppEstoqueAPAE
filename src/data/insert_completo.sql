@@ -265,18 +265,18 @@ VALUES
 -- Pedidos
 INSERT INTO `db_apae_estoque`.`pedidos` (`usuarios_id`, `pessoas_id`, `descricao`, `data_pedido`)
 VALUES 
-(2, 1, 'Pedido de arroz e feijão', '2023-08-01'),
-(2, 1, 'Pedido de leite e derivados', '2023-08-15'),
-(2, 2, 'Pedido de frutas e legumes', '2023-09-05'),
-(2, 2, 'Pedido de carnes e ovos', '2023-09-10'),
-(2, 3, 'Pedido de óleo de soja e azeite', '2023-12-01'),
-(2, 4, 'Pedido de cereais e grãos', '2024-01-20'),
-(2, 5, 'Pedido de açúcares e doces', '2024-02-15'),
-(2, 5, 'Pedido de condimentos e especiarias', '2024-02-20'),
-(2, 3, 'Pedido de massas e pães', '2024-03-01'),
-(2, 4, 'Pedido de sucos e bebidas', '2024-04-10'),
-(2, 1, 'Pedido de verduras e hortaliças', '2024-05-05'),
-(2, 2, 'Pedido de laticínios e queijos', '2024-06-01');
+(1, 1, 'Pedido de arroz e feijão', '2023-08-01'),
+(1, 1, 'Pedido de leite e derivados', '2023-08-15'),
+(1, 2, 'Pedido de frutas e legumes', '2023-09-05'),
+(1, 2, 'Pedido de carnes e ovos', '2023-09-10'),
+(1, 3, 'Pedido de óleo de soja e azeite', '2023-12-01'),
+(1, 4, 'Pedido de cereais e grãos', '2024-01-20'),
+(1, 5, 'Pedido de açúcares e doces', '2024-02-15'),
+(1, 5, 'Pedido de condimentos e especiarias', '2024-02-20'),
+(1, 3, 'Pedido de massas e pães', '2024-03-01'),
+(1, 4, 'Pedido de sucos e bebidas', '2024-04-10'),
+(1, 1, 'Pedido de verduras e hortaliças', '2024-05-05'),
+(1, 2, 'Pedido de laticínios e queijos', '2024-06-01');
 
 -- Associação entre doações e pedidos
 INSERT INTO `db_apae_estoque`.`doacoes_has_pedidos` (`doacoes_id`, `pedidos_id`)
