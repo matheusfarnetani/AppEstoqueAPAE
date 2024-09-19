@@ -1,20 +1,22 @@
 // Define as rotas CRUD para Users
 
 const express = require("express");
-const UsersController = require("../controllers/UsersController");
 const router = express.Router();
+const authMiddleware = require("../middlewares/authMiddleware.js");
+
+const UsersController = require("../controllers/UsersController.js");
 
 // Create Users
-router.post("/create", UsersController.create);
+router.post("/create", authMiddleware(), UsersController.create);
 
 // Read Users
-router.get("/", UsersController.findAll);
-router.get("/:id", UsersController.findById);
+router.get("/", authMiddleware(), UsersController.findAll);
+router.get("/:id", authMiddleware(), UsersController.findById);
 
 // Update Users
-router.put("/:id", UsersController.update);
+router.put("/:id", authMiddleware(), UsersController.update);
 
 // Delete Users
-router.delete("/:id", UsersController.delete);
+router.delete("/:id", authMiddleware("administrador"), UsersController.delete);
 
 module.exports = router;

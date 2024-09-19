@@ -1,6 +1,7 @@
-const Endereco = require("../models/Endereco");
+const Endereco = require("../models/Endereco.js");
 
 class EnderecosController {
+  // Create a new address
   async create(req, res) {
     const {
       tipo,
@@ -12,6 +13,7 @@ class EnderecosController {
       estado,
       cep,
     } = req.body;
+    const user_id = req.user_id; // Extract user_id from middleware
 
     let result = await Endereco.create(
       tipo,
@@ -21,22 +23,22 @@ class EnderecosController {
       bairro,
       cidade,
       estado,
-      cep
+      cep,
+      user_id // Pass user_id to set session variable
     );
 
     if (result.status) {
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "Endereço criado com sucesso!",
-          id: result.id,
-        });
+      return res.status(200).json({
+        success: true,
+        message: "Endereço criado com sucesso!",
+        id: result.id,
+      });
     } else {
       return res.status(400).json({ success: false, message: result.err });
     }
   }
 
+  // Get all addresses
   async findAll(req, res) {
     let result = await Endereco.findAll();
 
@@ -47,6 +49,7 @@ class EnderecosController {
     }
   }
 
+  // Get address by ID
   async findById(req, res) {
     let { id } = req.params;
 
@@ -59,6 +62,7 @@ class EnderecosController {
     }
   }
 
+  // Update address by ID
   async update(req, res) {
     let { id } = req.params;
     const {
@@ -71,6 +75,7 @@ class EnderecosController {
       estado,
       cep,
     } = req.body;
+    const user_id = req.user_id; // Extract user_id from middleware
 
     let result = await Endereco.update(
       id,
@@ -81,7 +86,8 @@ class EnderecosController {
       bairro,
       cidade,
       estado,
-      cep
+      cep,
+      user_id // Pass user_id to set session variable
     );
 
     if (result.status) {
@@ -91,10 +97,12 @@ class EnderecosController {
     }
   }
 
+  // Delete address by ID
   async delete(req, res) {
-    let { id } = req.params;
+    const { id } = req.params;
+    const user_id = req.user_id; // Extract user_id from middleware
 
-    let result = await Endereco.delete(id);
+    const result = await Endereco.delete(id, user_id); // Pass user_id to set session
 
     if (result.status) {
       return res.status(200).json({ success: true, message: result.message });

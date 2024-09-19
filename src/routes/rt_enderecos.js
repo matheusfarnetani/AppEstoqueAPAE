@@ -2,35 +2,21 @@
 
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middlewares/authMiddleware.js")
 
-const EnderecosController = require("../controllers/EnderecosController");
-const {
-  createEnderecoValidator,
-  updateEnderecoValidator,
-} = require("../validators/val_enderecos");
-const validate = require("../middlewares/validate");
+const EnderecosController = require("../controllers/EnderecosController.js");
 
 // Create Endereços
-router.post(
-  "/create",
-  createEnderecoValidator,
-  validate,
-  EnderecosController.create
-);
+router.post("/create", authMiddleware(), EnderecosController.create);
 
 // Read Endereços
-router.get("/", EnderecosController.findAll);
-router.get("/:id", EnderecosController.findById);
+router.get("/", authMiddleware(), EnderecosController.findAll);
+router.get("/:id", authMiddleware(), EnderecosController.findById);
 
 // Update Endereços
-router.put(
-  "/:id",
-  updateEnderecoValidator,
-  validate,
-  EnderecosController.update
-);
+router.put("/:id", authMiddleware(), EnderecosController.update);
 
 // Delete Endereços
-router.delete("/:id", EnderecosController.delete);
+router.delete("/:id", authMiddleware("administrador"), EnderecosController.delete);
 
 module.exports = router;

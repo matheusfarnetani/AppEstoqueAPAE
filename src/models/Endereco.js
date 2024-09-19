@@ -1,6 +1,11 @@
-const knex = require("../data/connection");
+const BaseModel = require("./BaseModel.js");
 
-class Endereco {
+class Endereco extends BaseModel {
+  constructor() {
+    super("endereco"); // Set the table name for the model
+  }
+
+  // Custom create method for Endereco (call BaseModel's create method)
   async create(
     tipo,
     logradouro,
@@ -9,48 +14,29 @@ class Endereco {
     bairro,
     cidade,
     estado,
-    cep
+    cep,
+    user_id // Pass user_id to set session variable
   ) {
-    try {
-      const [id] = await knex("endereco").insert({
-        tipo,
-        logradouro,
-        numero,
-        complemento,
-        bairro,
-        cidade,
-        estado,
-        cep,
-      });
+    const data = {
+      tipo,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      estado,
+      cep,
+    };
 
-      return { status: true, id: id };
+    try {
+      // Call the create method from BaseModel to avoid recursion
+      return await super.create(data, user_id); // Use "super.create" to call BaseModel's method
     } catch (err) {
       return { status: false, err: err.message };
     }
   }
 
-  async findAll() {
-    try {
-      const enderecos = await knex("endereco").select("*");
-      return { status: true, values: enderecos };
-    } catch (err) {
-      return { status: false, err: err.message };
-    }
-  }
-
-  async findById(id) {
-    try {
-      const endereco = await knex("endereco").where({ id }).first();
-      if (endereco) {
-        return { status: true, values: endereco };
-      } else {
-        return { status: false, message: "Endereço não encontrado." };
-      }
-    } catch (err) {
-      return { status: false, err: err.message };
-    }
-  }
-
+  // Custom update method for Endereco
   async update(
     id,
     tipo,
@@ -60,7 +46,8 @@ class Endereco {
     bairro,
     cidade,
     estado,
-    cep
+    cep,
+    user_id // Pass user_id to set session variable
   ) {
     const updatedFields = {
       tipo,
@@ -73,38 +60,20 @@ class Endereco {
       cep,
     };
 
+    // Remove undefined fields
     Object.keys(updatedFields).forEach((key) => {
       if (!updatedFields[key]) delete updatedFields[key];
     });
 
     try {
-      const affectedRows = await knex("endereco")
-        .where({ id })
-        .update(updatedFields);
-
-      if (affectedRows) {
-        return { status: true, message: "Endereço atualizado com sucesso!" };
-      } else {
-        return { status: false, message: "Endereço não encontrado." };
-      }
+      // Call the update method from BaseModel to avoid recursion
+      return await super.update(id, updatedFields, user_id); // Use "super.update" to call BaseModel's method
     } catch (err) {
       return { status: false, err: err.message };
     }
   }
 
-  async delete(id) {
-    try {
-      const affectedRows = await knex("endereco").where({ id }).del();
-
-      if (affectedRows) {
-        return { status: true, message: "Endereço excluído com sucesso!" };
-      } else {
-        return { status: false, message: "Endereço não encontrado." };
-      }
-    } catch (err) {
-      return { status: false, err: err.message };
-    }
-  }
+  // The other methods (findAll, findById, delete) are inherited from BaseModel
 }
 
 module.exports = new Endereco();

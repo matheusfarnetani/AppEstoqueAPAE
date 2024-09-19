@@ -256,11 +256,11 @@ VALUES
 (2, 'Doação de laticínios e queijos', '2024-06-01');
 
 -- Inserção na tabela de usuários
-INSERT INTO `db_apae_estoque`.`usuarios` (`username`, `senha`, `email`, `funcao`)
-VALUES
-('admin01', SHA2('senhaAdmin123', 256), 'admin01@example.com', 'administrador'),
-('nutri01', SHA2('senhaNutri123', 256), 'nutri01@example.com', 'nutricionista'),
-('cozinheiro01', SHA2('senhaCozinha123', 256), 'cozinheiro01@example.com', 'cozinheiro');
+-- INSERT INTO `db_apae_estoque`.`usuarios` (`username`, `senha`, `email`, `funcao`)
+-- VALUES
+-- ('admin01', SHA2('senhaAdmin123', 256), 'admin01@example.com', 'administrador'),
+-- ('nutri01', SHA2('senhaNutri123', 256), 'nutri01@example.com', 'nutricionista'),
+-- ('cozinheiro01', SHA2('senhaCozinha123', 256), 'cozinheiro01@example.com', 'cozinheiro');
 
 -- Pedidos
 INSERT INTO `db_apae_estoque`.`pedidos` (`usuarios_id`, `pessoas_id`, `descricao`, `data_pedido`)

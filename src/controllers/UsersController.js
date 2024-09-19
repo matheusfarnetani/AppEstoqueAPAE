@@ -1,14 +1,14 @@
 require("dotenv").config();
-var User = require("../models/Users");
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
+var User = require("../models/Users.js");
 
 class UsersController {
   async create(req, res) {
-    const user_id = req.user_id; // Obter o user_id do middleware
-    let { username, email, password, funcao } = req.body;
+    const user_id = req.user_id; // Obtain user_id from middleware
+    const { username, email, password, funcao } = req.body;
 
-    let result = await User.new(username, email, password, funcao, user_id);
+    const result = await User.new(username, email, password, funcao, user_id);
     if (result.status) {
       res
         .status(200)
@@ -19,7 +19,7 @@ class UsersController {
   }
 
   async findAll(req, res) {
-    let users = await User.findAll();
+    const users = await User.findAll(["id", "username", "email", "funcao"]);
     if (users.status) {
       res.status(200).json({ success: true, values: users.values });
     } else {
@@ -28,27 +28,25 @@ class UsersController {
   }
 
   async findById(req, res) {
-    let id = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     if (!Number.isInteger(id)) {
       return res
         .status(400)
-        .json({ success: false, message: "Parâmetros inválidos." });
+        .json({ success: false, message: "Parâmetro inválido." });
+    }
+
+    const user = await User.findById(id);
+    if (!user.status) {
+      res
+        .status(404)
+        .json({ success: false, message: user.message || user.err });
     } else {
-      let user = await User.findById(id);
-      if (user.status === undefined) {
-        res
-          .status(404)
-          .json({ success: false, message: "Usuário não encontrado." });
-      } else if (!user.status) {
-        res.status(404).json({ success: false, message: user.err });
-      } else {
-        res.status(200).json({ success: true, message: user.values });
-      }
+      res.status(200).json({ success: true, message: user.values });
     }
   }
 
   async delete(req, res) {
-    const user_id = req.user_id; // Obter o user_id do middleware
+    const user_id = req.user_id; // Obtain user_id from middleware
     const id = parseInt(req.params.id);
 
     if (!Number.isInteger(id)) {
@@ -57,18 +55,18 @@ class UsersController {
         .json({ success: false, message: "Parâmetro inválido." });
     }
 
-    let result = await User.delete(id, user_id);
+    const result = await User.delete(id, user_id); // Delete using BaseModel method
     if (result.status) {
-      res.status(200).json({ success: result.status, message: result.message });
+      res.status(200).json({ success: true, message: result.message });
     } else {
-      res.status(406).json({ success: result.status, message: result.err });
+      res.status(406).json({ success: false, message: result.err });
     }
   }
 
   async update(req, res) {
-    const user_id = req.user_id; // Obter o user_id do middleware
-    const id = parseInt(req.params.id);
-    const { username, email, funcao } = req.body;
+    const user_id = req.user_id; // Extracted from middleware
+    const id = parseInt(req.params.id); // User ID to update
+    const { username, email, funcao } = req.body; // Fields to update
 
     if (!Number.isInteger(id)) {
       return res
@@ -76,47 +74,44 @@ class UsersController {
         .json({ success: false, message: "Parâmetro inválido." });
     }
 
-    let result = await User.update(id, username, email, funcao, user_id);
+    // Debugging: Log user_id and id to be updated
+    console.log("User ID from middleware:", user_id);
+    console.log("Updating user with ID:", id);
+
+    // Pass user_id to the User.update method
+    const result = await User.update(id, { username, email, funcao }, user_id);
+
     if (result.status) {
-      res.status(200).json({ success: result.status, message: result.message });
+      res.status(200).json({ success: true, message: result.message });
     } else {
-      res.status(406).json({ success: result.status, message: result.err });
+      res.status(400).json({ success: false, message: result.err });
     }
   }
-
   async login(req, res) {
-    let { email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-      let user = await User.findByEmail(email);
-
-      // Verifica se o usuário foi encontrado
-      if (user.status === undefined) {
+      const user = await User.findByEmail(email);
+      if (!user.status) {
         return res
           .status(404)
-          .json({ success: false, message: "Usuário não encontrado." });
-      } else if (!user.status) {
-        return res.status(400).json({ success: false, message: user.err });
+          .json({ success: false, message: user.message || user.err });
       }
 
-      // Verifica se a senha está correta
-      let checkPassword = await bcrypt.compare(password, user.values.senha);
+      // Debugging: Log user values to check if id is present
+      console.log("User values in login:", user.values);
 
-      // Senha incorreta
+      const checkPassword = await bcrypt.compare(password, user.values.senha);
       if (!checkPassword) {
         return res
           .status(406)
           .json({ success: false, message: "Senha inválida." });
       }
 
-      // Gera token para o usuário
-      if (!process.env.JWT_SECRET) {
-        throw new Error("JWT_SECRET não está definido no ambiente.");
-      }
-
-      let token = jwt.sign(
+      // Ensure user ID is included in JWT token
+      const token = jwt.sign(
         {
-          id: user.values.id,
+          id: user.values.id, // Ensure user.id exists
           email: user.values.email,
           funcao: user.values.funcao,
         },
@@ -126,7 +121,7 @@ class UsersController {
 
       res.status(200).json({ success: true, token: token });
     } catch (error) {
-      console.error("Erro no login:", error.message);
+      console.error("Login error:", error.message);
       res
         .status(500)
         .json({ success: false, message: "Erro interno no servidor." });
