@@ -300,12 +300,7 @@ CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`valores_nutricionais` (
   `vitamina_b12` DECIMAL(10,2) NULL DEFAULT NULL,
   `acido_folico` DECIMAL(10,2) NULL DEFAULT NULL,
   `percentual_valor_diario` JSON NULL DEFAULT NULL,
-  PRIMARY KEY (`insumos_id`),
-  CONSTRAINT `fk_valores_nutricionais_insumos1`
-    FOREIGN KEY (`insumos_id`)
-    REFERENCES `db_apae_estoque`.`insumos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`insumos_id`))
 ENGINE = InnoDB;
 
 
@@ -1033,6 +1028,11 @@ CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_doacoes_by_pedido` (`pedidos_
 CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_pedidos_by_doacao` (`doacoes_id` INT, `pedido_id` INT, `pedido_descricao` INT, `data_pedido` INT);
 
 -- -----------------------------------------------------
+-- Placeholder table for view `db_apae_estoque`.`view_itens_pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_itens_pedido` (`item_id` INT, `pedidos_id` INT, `insumos_id` INT, `quantidade` INT, `insumo_nome` INT, `unidade_medida_nome` INT);
+
+-- -----------------------------------------------------
 -- procedure proc_inserir_estoque_entrada
 -- -----------------------------------------------------
 
@@ -1598,6 +1598,26 @@ FROM
   pedidos
 JOIN
   doacoes_has_pedidos ON pedidos.id = doacoes_has_pedidos.pedidos_id;
+
+-- -----------------------------------------------------
+-- View `db_apae_estoque`.`view_itens_pedido`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `db_apae_estoque`.`view_itens_pedido`;
+USE `db_apae_estoque`;
+CREATE OR REPLACE VIEW view_itens_pedido AS
+SELECT
+  itens_pedido.id as item_id,
+  itens_pedido.pedidos_id,
+  itens_pedido.insumos_id,
+  itens_pedido.quantidade,
+  insumos.nome as insumo_nome,
+  unidades_medida.nome as unidade_medida_nome
+FROM
+  itens_pedido
+JOIN
+  insumos ON itens_pedido.insumos_id = insumos.id
+JOIN
+  unidades_medida ON itens_pedido.unidades_medida_id = unidades_medida.id;
 USE `db_apae_estoque`;
 
 DELIMITER $$
@@ -3041,7 +3061,7 @@ BEGIN
     WHERE `valores_nutricionais_insumos_id` = OLD.insumos_id;
 
     -- Inserir na tabela content
-    INSERT INTO `db_apa_estoque`.`log_valores_nutricionais_content` (
+    INSERT INTO `db_apae_estoque`.`log_valores_nutricionais_content` (
         `log_valores_nutricionais_main_valores_nutricionais_insumos_id`,
         `revisao`,
         `porcao`,
