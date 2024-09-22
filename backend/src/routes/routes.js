@@ -19,6 +19,9 @@ const routerCategoriaInsumo = require("./rt_categoriaInsumo.js");
 const routerValoresNutricionais = require("./rt_valoresNutricionais.js");
 const routerInsumos = require("./rt_insumos.js");
 const routerEstoqueEntrada = require("./rt_estoqueEntrada.js");
+const routerEstoque = require("./rt_estoque.js");
+const routerEstoqueSaida = require("./rt_estoqueSaida.js");
+const routerEstoqueVencido = require("./rt_estoqueVencido.js");
 
 // Controllers
 const UsersController = require("../controllers/UsersController");
@@ -39,6 +42,9 @@ router.use("/api/categoria_insumo", routerCategoriaInsumo);
 router.use("/api/valores_nutricionais", routerValoresNutricionais);
 router.use("/api/insumos", routerInsumos);
 router.use("/api/estoque_entrada", routerEstoqueEntrada);
+router.use("/api/estoque", routerEstoque);
+router.use("/api/estoque_saida", routerEstoqueSaida);
+router.use("/api/estoque_vencido", routerEstoqueVencido);
 
 // Custom 404
 router.all("*", (req, res) => {

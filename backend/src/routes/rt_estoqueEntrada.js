@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const authMiddleware = require("../middlewares/authMiddleware");
-const EstoqueEntradaController = require("../controllers/EstoqueEntradaController");
+const authMiddleware = require("../middlewares/authMiddleware.js");
+const EstoqueEntradaController = require("../controllers/EstoqueEntradaController.js");
 
 // Add new stock entry
 router.post("/create", authMiddleware(), EstoqueEntradaController.create);

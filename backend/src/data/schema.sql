@@ -995,7 +995,7 @@ CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_estoque_vencendo_hoje` (`nome
 -- -----------------------------------------------------
 -- Placeholder table for view `db_apae_estoque`.`view_insumos_vencidos_descartados`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_insumos_vencidos_descartados` (`nome_insumo` INT, `quantidade_total` INT, `unidade_medida` INT, `data_validade` INT);
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_insumos_vencidos_descartados` (`estoque_vencido_id` INT, `insumos_id` INT, `nome_insumo` INT, `quantidade` INT, `unidade_medida` INT, `data_validade` INT, `descartado` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `db_apae_estoque`.`view_pessoas_doacoes`
@@ -1005,7 +1005,7 @@ CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_pessoas_doacoes` (`nome_pesso
 -- -----------------------------------------------------
 -- Placeholder table for view `db_apae_estoque`.`view_estoque_saida`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_estoque_saida` (`nome_insumo` INT, `quantidade_total` INT, `unidade_medida` INT, `data_saida` INT, `observacao` INT);
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_estoque_saida` (`estoque_saida_id` INT, `insumos_id` INT, `nome_insumo` INT, `quantidade` INT, `unidade_medida` INT, `data_saida` INT, `observacao` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `db_apae_estoque`.`view_doacoes_pessoas`
@@ -1031,6 +1031,16 @@ CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_pedidos_by_doacao` (`doacoes_
 -- Placeholder table for view `db_apae_estoque`.`view_itens_pedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_itens_pedido` (`item_id` INT, `pedidos_id` INT, `insumos_id` INT, `quantidade` INT, `insumo_nome` INT, `unidade_medida_nome` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `db_apae_estoque`.`view_estoque_completo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_estoque_completo` (`estoque_id` INT, `nome_insumo` INT, `quantidade` INT, `unidade_medida` INT, `status` INT, `data_validade` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `db_apae_estoque`.`view_insumos_vencidos_nao_descartados`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`view_insumos_vencidos_nao_descartados` (`estoque_vencido_id` INT, `insumos_id` INT, `nome_insumo` INT, `quantidade` INT, `unidade_medida` INT, `data_validade` INT, `descartado` INT);
 
 -- -----------------------------------------------------
 -- procedure proc_inserir_estoque_entrada
@@ -1472,10 +1482,13 @@ DROP TABLE IF EXISTS `db_apae_estoque`.`view_insumos_vencidos_descartados`;
 USE `db_apae_estoque`;
 CREATE OR REPLACE VIEW `view_insumos_vencidos_descartados` AS
 SELECT 
+    v.id AS estoque_vencido_id,
+    v.insumos_id,
     i.nome AS `nome_insumo`,
-    SUM(v.quantidade) AS `quantidade_total`,
+    v.quantidade,
     um.nome AS `unidade_medida`,
-    v.data_validade
+    v.data_validade,
+    v.descartado
 FROM 
     `estoque_vencido` v
 JOIN 
@@ -1483,9 +1496,7 @@ JOIN
 JOIN 
     `unidades_medida` um ON v.unidades_medida_id = um.id
 WHERE 
-    v.descartado = 0
-GROUP BY 
-    i.nome, um.nome, v.data_validade;
+    v.descartado = 1;
 
 -- -----------------------------------------------------
 -- View `db_apae_estoque`.`view_pessoas_doacoes`
@@ -1514,19 +1525,19 @@ DROP TABLE IF EXISTS `db_apae_estoque`.`view_estoque_saida`;
 USE `db_apae_estoque`;
 CREATE OR REPLACE VIEW `view_estoque_saida` AS
 SELECT 
-    i.nome AS `nome_insumo`,
-    SUM(es.quantidade) AS `quantidade_total`,
-    um.nome AS `unidade_medida`,
+    es.id AS estoque_saida_id,
+    es.insumos_id,
+    i.nome AS nome_insumo,
+    es.quantidade,
+    um.nome AS unidade_medida,
     es.data_saida,
     es.observacao
 FROM 
-    `estoque_saida` es
+    estoque_saida es
 JOIN 
-    `insumos` i ON es.insumos_id = i.id
+    insumos i ON es.insumos_id = i.id
 JOIN 
-    `unidades_medida` um ON es.unidades_medida_id = um.id
-GROUP BY 
-    i.nome, um.nome, es.data_saida, es.observacao;
+    unidades_medida um ON es.unidades_medida_id = um.id;
 
 -- -----------------------------------------------------
 -- View `db_apae_estoque`.`view_doacoes_pessoas`
@@ -1618,6 +1629,49 @@ JOIN
   insumos ON itens_pedido.insumos_id = insumos.id
 JOIN
   unidades_medida ON itens_pedido.unidades_medida_id = unidades_medida.id;
+
+-- -----------------------------------------------------
+-- View `db_apae_estoque`.`view_estoque_completo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `db_apae_estoque`.`view_estoque_completo`;
+USE `db_apae_estoque`;
+CREATE OR REPLACE VIEW `view_estoque_completo` AS
+SELECT 
+    e.id AS estoque_id,
+    i.nome AS nome_insumo,
+    e.quantidade,
+    um.nome AS unidade_medida,
+    e.status,
+    e.data_validade
+FROM 
+    estoque e
+JOIN 
+    insumos i ON e.insumos_id = i.id
+JOIN 
+    unidades_medida um ON e.unidades_medida_id = um.id;
+
+-- -----------------------------------------------------
+-- View `db_apae_estoque`.`view_insumos_vencidos_nao_descartados`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `db_apae_estoque`.`view_insumos_vencidos_nao_descartados`;
+USE `db_apae_estoque`;
+CREATE OR REPLACE VIEW `view_insumos_vencidos_nao_descartados` AS
+SELECT 
+    v.id AS estoque_vencido_id,
+    v.insumos_id,
+    i.nome AS `nome_insumo`,
+    v.quantidade,
+    um.nome AS `unidade_medida`,
+    v.data_validade,
+    v.descartado
+FROM 
+    `estoque_vencido` v
+JOIN 
+    `insumos` i ON v.insumos_id = i.id
+JOIN 
+    `unidades_medida` um ON v.unidades_medida_id = um.id
+WHERE 
+    v.descartado = 0;
 USE `db_apae_estoque`;
 
 DELIMITER $$
