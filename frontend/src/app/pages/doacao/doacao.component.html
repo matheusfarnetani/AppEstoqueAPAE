@@ -1,1 +1,58 @@
-<p>doacao works!</p>
+<body>
+    <aside>
+      <div class="sidenav">
+        <img src="assets/logo-apae.png" alt="logo-apae" id="logo-aside" />
+        <button routerLink="/admin" type="button" class="btn btn-dark" data-bs-toggle="button"> ADMINISTRAÇÃO</button>
+        <button routerLink="/estoque" type="button" class="btn btn-dark" data-bs-toggle="button">ESTOQUE</button>
+        <button routerLink="doacao" type="button" class="btn btn-dark" data-bs-toggle="button"> DOAÇÃO</button>
+        <div class="line">
+          <p id="name"><strong>Leticia Campos</strong></p>
+          <p id="job">Nutricionista</p>
+          <img src="assets/sair.png" alt="" id="out" />
+          <img src="assets/Foto.png" alt="p" id="profile" />
+        </div>
+      </div>
+    </aside>
+  
+  
+    <main>
+      <div id="white">
+        <h2 class="form-title" style=" color: #2A455A; font-size: 2.1rem; text-align: center;">DOAÇÃO</h2>
+        <div class="form-container ">
+          <form>
+            <div class="d-flex justify-content-between mb-3" >
+              <div class="imput group">
+                <label for="donorId" class="form-label mb-0">ID do Doador</label>
+                <input type="text" class="form-control " id="donorId" placeholder="Digite o ID"/>
+              </div>
+              <div class="imput group mb-3">
+                <label for="donationDate" class="form-label mb-0">Data da Doação</label >
+                <input type="date" class="form-control" id="donationDate" />
+              </div>
+            </div>
+            <div class="imput group">
+              <label for="description" class="form-label mb-1" >Descrição</label>
+              <textarea class="form-control textarea-custom" id="description"  placeholder="Escreva uma descrição..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-custom" id="button">SALVAR</button>
+          </form>
+       
+      <button type="button" class="btn btn-primary" (click)="abrirModal()">Abrir Modal</button>
+  
+      <div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button  routerLink="/" type="button" class="btn btn-success"  style="margin-right: 35px;">Sim, desejo sair</button>
+              <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </main>
+  </body>

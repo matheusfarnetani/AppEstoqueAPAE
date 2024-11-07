@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AdminComponent {
 
+  isModalOpen = false;
+
+  abrirModal() {
+    this.isModalOpen = true;
+  }
+
+  fecharModal() {
+    this.isModalOpen = false;
+  }
+
 }

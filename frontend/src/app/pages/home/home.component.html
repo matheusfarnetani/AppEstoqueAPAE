@@ -1,1 +1,38 @@
-<p>home works!</p>
+<body>
+    <aside>
+        <div class="sidenav">
+            <img src="assets/logo-apae.png" alt="logo-apae" id="logo-aside">
+            <button routerLink="/admin"  type="button" class="btn btn-dark" data-bs-toggle="button">ADMINISTRAÇÃO</button>
+            <button routerLink="/estoque" type="button" class="btn btn-dark" data-bs-toggle="button">ESTOQUE</button>
+            <button routerLink="/doacao" type="button" class="btn btn-dark" data-bs-toggle="button">DOAÇÃO</button>
+            <div class="line">
+                <p id="name"><strong>Leticia Campos</strong></p>
+                <p id="job">Nutricionista</p>
+                <img (click)="abrirModal()" src="assets/sair.png" alt="" id="out">
+                <a ><img src="assets/Foto.png" alt="p" id="profile"> </a>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <div id="white">
+            <h1 id="name_profile">BOM DIA, <br>LETICIA CAMPOS!</h1>
+            <img src="assets/logo-apae.png" alt="" id="principal_logo">
+            <button type="button" class="btn btn-primary" (click)="abrirModal()">Abrir Modal</button>
+
+<div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button routerLink="/" type="button" class="btn btn-success"  style="margin-right: 35px;" >Sim, desejo sair</button>
+        <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</main> 
+</body>

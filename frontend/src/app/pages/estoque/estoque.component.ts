@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './estoque.component.css'
 })
 export class EstoqueComponent {
+  isModalOpen = false;
 
+  abrirModal() {
+    this.isModalOpen = true;
+  }
+
+  fecharModal() {
+    this.isModalOpen = false;
+  }
 }
