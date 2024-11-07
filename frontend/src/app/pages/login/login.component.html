@@ -1,1 +1,14 @@
-<p>login works!</p>
+<body>
+    <div class="page">
+        <form [formGroup]="formulario" method="POST" class="formLogin">
+            <img src="assets/logo-apae.png" alt="logo-apae">
+            @if (formulario.get('email')?.hasError('email') && formulario.get('email')?.touched) {
+                <p class="alert alert-warning" style="width: 300px; padding: 5px; margin: auto;">O campo precisa conter o icone de "&#64;"</p>
+            }
+            <input formControlName="email" type="email" placeholder="Digite seu e-mail" class="form-label"/>
+            <input formControlName="senha" type="password" placeholder="Digite sua senha" />
+            <input routerLink="/home" type="submit" value="LOGIN" class="btn" [disabled]="formulario.invalid"/>
+            <a routerLink="/recsenha" id="forget">Esqueci minha senha</a>
+        </form>
+    </div>
+</body>

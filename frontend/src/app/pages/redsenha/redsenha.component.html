@@ -1,1 +1,15 @@
-<p>redsenha works!</p>
+<body>
+    <div class="page">
+        <form [formGroup]="formulario" method="POST" class="formLogin">
+            <h2>Redifinição de Senha</h2>
+            <p>Insira o código que foi enviado pelo e-mail e redefina uma nova senha.</p>
+            <input type="email" placeholder="Insira o Código" autofocus="true" />
+            @if (formulario.get('senha')?.hasError('minlength') && formulario.get('senha')?.touched) {
+                <p class="alert alert-warning" style="width: 300px; padding: 5px; margin: auto; ">Os campos precisam conter no minimo 4 caracteres</p>
+            }
+            <input  formControlName="senha" type="password" placeholder="Digite sua nova senha" autofocus="true" />
+            <input  formControlName="senha" type="password" placeholder="Digite novamente sua senha" />
+            <input routerLink="/" type="submit" value="Redefinir Senha" class="btn" [disabled]="formulario.invalid"/>
+        </form>
+    </div>
+</body>

@@ -1,1 +1,14 @@
-<p>recsenha works!</p>
+<body>
+    <div class="page">
+        <form [formGroup]="formulario" method="POST" class="formLogin">
+            <h2>Recuperação de Senha</h2>
+            <p>Digite seu e-mail no campo abaixo e lhe enviaremos um link para redefini-la.</p>
+            @if (formulario.get('email')?.hasError('email') && formulario.get('email')?.touched) {
+                <p class="alert alert-warning" style="width: 250px; padding: 5px; margin: auto; font-size: 17px; ">O campo precisa conter "&#64;"</p>
+            }
+            <input  formControlName="email" type="email" placeholder="Digite seu e-mail" autofocus="true"/>
+            <input  routerLink="/redsenha" type="submit" value="Redefinir Senha" class="btn" [disabled]="formulario.invalid">
+            <button routerLink="/" type="submit" class="btn" id="voltar">Voltar a tela de login</button>
+        </form>
+    </div>
+</body>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-redsenha',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './redsenha.component.css'
 })
 export class RedsenhaComponent {
-
+  formulario = new FormGroup({
+    senha: new FormControl ('', [Validators.required, Validators.minLength(4)]),
+  })
 }
