@@ -10,23 +10,6 @@
           <p id="job">Nutricionista</p>
           <img (click)="abrirModal()" src="assets/sair.png" alt="" id="out">
           <img src="assets/Foto.png" alt="p" id="profile"/>
-
-
-          
-          <div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog"
-            style="background: rgba(0,0,0,0.5);">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-body text-center">
-                  <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
-                </div>
-                <div class="modal-footer d-flex justify-content-center" style="margin-right: 35px;" id="bt">
-                  <button type="button" class="btn btn-success">Sim, desejo sair</button>
-                  <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </aside>
@@ -43,9 +26,19 @@
             <div id="btn-acess">
               <button class="btn btn-primary" style="font-weight: bold;">+ Adicionar Item</button>
               <button class="btn btn-primary" style="font-weight: bold;">- Remover Item</button>
-              <button class="btn btn-primary" style="font-weight: bold;">Filtros</button>
+            <div class="btn-group">
+               <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Filtro</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Alguma ação</a></li>
+                  <li><a class="dropdown-item" href="#">Outra ação</a></li>
+                  <li><a class="dropdown-item" href="#">Alguma coisa aqui</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Link separado</a></li>
+                </ul>
             </div>
           </div>
+        </div>
+
   
           <div class="d-flex justify-content-between align-items-center mb-2">
             <span id="result">Foram achados <strong>9</strong> itens</span>
@@ -58,9 +51,8 @@
   
           <div id="item-list" style="width: 100%; overflow-y: scroll; max-height: 300px;">
             <div class="item-card active">
-              <div class="item-icon">🍚</div>
               <div>
-                <div>Arroz <span class="item-status aberto ms-2">Aberto</span></div>
+                <div style="font-weight: 700;">Arroz <span class="item-status aberto ms-2">Aberto</span></div>
               </div>
               <div class="ms-auto text-end">
                 <div>Quantidade: 4x</div>
@@ -69,9 +61,8 @@
             </div>
   
             <div class="item-card">
-              <div class="item-icon">🥕</div>
               <div>
-                <div>Cenoura <span class="item-status fechado ms-2">Fechado</span></div>
+                <div style="font-weight: 700;">Cenoura <span class="item-status fechado ms-2">Fechado</span></div>
               </div>
               <div class="ms-auto text-end">
                 <div>Quantidade: 7x</div>
@@ -79,10 +70,8 @@
               </div>
             </div>
   
-            <div class="item-card">
-              <div class="item-icon">🐟</div>
-              <div>
-                <div>Peixe <span class="item-status aberto ms-2">Aberto</span></div>
+            <div class="item-card"><div>
+                <div style="font-weight: 700;">Peixe <span class="item-status aberto ms-2">Aberto</span></div>
               </div>
               <div class="ms-auto text-end">
                 <div>Quantidade: 10x</div>
@@ -91,6 +80,21 @@
             </div>
           </div>
         </div>
-      </div>
+
+        <div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog"
+            style="background: rgba(0,0,0,0.5);">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-body text-center">
+                  <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
+                </div>
+                <div class="modal-footer d-flex justify-content-center" style="margin-right: 35px;" id="bt">
+                  <button routerLink="/" type="button" class="btn btn-success">Sim, desejo sair</button>
+                  <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </main>
   </body>
