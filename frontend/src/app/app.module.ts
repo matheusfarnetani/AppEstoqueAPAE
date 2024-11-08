@@ -12,6 +12,7 @@ import { EstoqueComponent } from './pages/estoque/estoque.component';
 import { DoacaoComponent } from './pages/doacao/doacao.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AdminuserComponent } from './pages/adminuser/adminuser.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CommonModule } from '@angular/common';
     HomeComponent,
     AdminComponent,
     EstoqueComponent,
-    DoacaoComponent
+    DoacaoComponent,
+    AdminuserComponent
   ],
   imports: [
     BrowserModule,
