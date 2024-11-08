@@ -8,7 +8,7 @@
         <div class="line">
           <p id="name"><strong>Leticia Campos</strong></p>
           <p id="job">Nutricionista</p>
-          <img src="assets/sair.png" alt="" id="out" />
+          <img (click)="abrirModal()  "src="assets/sair.png" alt="" id="out" />
           <img src="assets/Foto.png" alt="p" id="profile" />
         </div>
       </div>
@@ -37,7 +37,6 @@
             <button type="submit" class="btn btn-custom" id="button">SALVAR</button>
           </form>
        
-      <button type="button" class="btn btn-primary" (click)="abrirModal()">Abrir Modal</button>
   
       <div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
         <div class="modal-dialog modal-dialog-centered" role="document">

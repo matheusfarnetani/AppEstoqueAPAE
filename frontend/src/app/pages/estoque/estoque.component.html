@@ -8,8 +8,11 @@
         <div class="line">
           <p id="name"><strong>Leticia Campos</strong></p>
           <p id="job">Nutricionista</p>
-          <button type="button" class="btn btn-primary" (click)="abrirModal()">Abrir Modal</button>
-  
+          <img (click)="abrirModal()" src="assets/sair.png" alt="" id="out">
+          <img src="assets/Foto.png" alt="p" id="profile"/>
+
+
+          
           <div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog"
             style="background: rgba(0,0,0,0.5);">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -17,7 +20,7 @@
                 <div class="modal-body text-center">
                   <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
                 </div>
-                <div class="modal-footer d-flex justify-content-center" id="bt">
+                <div class="modal-footer d-flex justify-content-center" style="margin-right: 35px;" id="bt">
                   <button type="button" class="btn btn-success">Sim, desejo sair</button>
                   <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
                 </div>
@@ -25,8 +28,6 @@
             </div>
           </div>
         </div>
-        <img src="assets/sair.png" alt="" id="out">
-        <img src="assets/Foto.png" alt="p" id="profile">
       </div>
     </aside>
   
@@ -55,7 +56,7 @@
             </div>
           </div>
   
-          <div id="item-list" style="width: 100%;">
+          <div id="item-list" style="width: 100%; overflow-y: scroll; max-height: 300px;">
             <div class="item-card active">
               <div class="item-icon">🍚</div>
               <div>

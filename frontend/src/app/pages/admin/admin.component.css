@@ -23,15 +23,16 @@ body {
     color: #2f4858;
 }
 
+
 .divider {
     border-left: 2px solid #ddd;
     height: 100%;
 }
 
 
-
 .container-form{
     width: 80%;
+    margin-left: 85px;
     color: #000000;
     text-align: start;
 }
@@ -40,6 +41,10 @@ body {
 
 .row{
     margin-top: 9vh;
+}
+
+.form-title{
+
 }
 
 #save{
@@ -52,6 +57,10 @@ body {
     border-radius: 5px;
     margin-top: 1rem;
     margin-left: 17.6rem;
+}
+
+.form-label{
+    margin-bottom: 0.15rem;
 }
 
 #principal_logo {
@@ -67,7 +76,6 @@ body {
     width: 95px;
     height: 133px;
     transform: translate(76%, 0%);
-
 }
 
 
