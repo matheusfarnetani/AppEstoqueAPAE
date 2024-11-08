@@ -27,8 +27,8 @@
             
 
             <div id="btn-acess">
-              <button class="btn btn-primary" style="font-weight: bold;">+ Adicionar Item</button>
-              <button class="btn btn-primary" style="font-weight: bold;">- Remover Item</button>
+              <button class="btn btn-primary" style="font-weight: bold;" (click)="abrirAddItemModal()">+ Adicionar Item</button>
+              <button class="btn btn-primary" style="font-weight: bold;" (click)="abrirRemoveItemModal()">- Remover Item</button>
 
             <div class="btn-group">
                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Filtro</button>
@@ -43,8 +43,10 @@
           </div>
         </div>
 
+
+
         <div *ngIf="isAddItemModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title">Novo Item</h5>
@@ -56,20 +58,47 @@
                     <label for="idInsumo" class="form-label">ID do Insumo</label>
                     <input type="text" class="form-control" id="idInsumo">
                   </div>
+                  <div class="mb-3">
+                    <label for="idInsumo" class="form-label">Quantidade</label>
+                    <input type="number" class="form-control" id="idInsumo">
+                  </div>
+                  <div class="mb-3">
+                    <label for="idInsumo" class="form-label">ID do Insumo</label>
+                    <input type="text" class="form-control" id="idInsumo">
+                  </div>
+
+                  
+                  <div class="mb-3">
+                    <label for="idInsumo" class="form-label">ID do Insumo</label>
+                    <input type="text" class="form-control" id="idInsumo">
+                  </div>
+                  <div class="mb-3">
+                    <label for="idInsumo" class="form-label">ID do Insumo</label>
+                    <input type="text" class="form-control" id="idInsumo">
+                  </div>
+                  <div class="mb-3">
+                    <label for="idInsumo" class="form-label">ID do Insumo</label>
+                    <input type="text" class="form-control" id="idInsumo">
+                  </div>
+
+
                   <!-- Outros campos -->
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="fecharAddItemModal()">Voltar</button>
+                <button type="button" class="btn btn-primary" (click)="fecharAddItemModal()">Sair</button>
                 <button type="button" class="btn btn-primary">Salvar</button>
               </div>
             </div>
           </div>
         </div>
 
+
+
+
         <!-- Modal Remover Item -->
         <div *ngIf="isRemoveItemModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title">Remover Item</h5>
@@ -151,6 +180,5 @@
               </div>
             </div>
           </div>
-        </div>
     </main>
   </body>

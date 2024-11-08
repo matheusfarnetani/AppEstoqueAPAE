@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-estoque',
@@ -7,6 +9,8 @@ import { Component } from '@angular/core';
 })
 export class EstoqueComponent {
   isModalOpen = false;
+  isAddItemModalOpen = false;
+  isRemoveItemModalOpen = false;
 
   abrirModal() {
     this.isModalOpen = true;
@@ -15,9 +19,6 @@ export class EstoqueComponent {
   fecharModal() {
     this.isModalOpen = false;
   }
-  
-  isAddItemModalOpen = false;
-  isRemoveItemModalOpen = false;
 
   abrirAddItemModal() {
     this.isAddItemModalOpen = true;
