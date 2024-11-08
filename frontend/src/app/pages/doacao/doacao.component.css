@@ -129,6 +129,8 @@ h2{
     width: 30px;
     margin-bottom: 32px;
     transform: translate(-12%, -180%);
+    cursor: pointer;
+
 }
 
 #profile {

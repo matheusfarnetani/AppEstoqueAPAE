@@ -15,4 +15,23 @@ export class EstoqueComponent {
   fecharModal() {
     this.isModalOpen = false;
   }
+  
+  isAddItemModalOpen = false;
+  isRemoveItemModalOpen = false;
+
+  abrirAddItemModal() {
+    this.isAddItemModalOpen = true;
+  }
+
+  fecharAddItemModal() {
+    this.isAddItemModalOpen = false;
+  }
+
+  abrirRemoveItemModal() {
+    this.isRemoveItemModalOpen = true;
+  }
+
+  fecharRemoveItemModal() {
+    this.isRemoveItemModalOpen = false;
+  }
 }
