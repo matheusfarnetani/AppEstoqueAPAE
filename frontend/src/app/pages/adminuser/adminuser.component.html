@@ -17,7 +17,7 @@
     <main>
         <div id="white">
             <div class="form-title" style=" color: #2A455A; margin-bottom: 1.3rem; font-size: 2.1rem; font-weight: bold; margin-right: 10px; margin-top: 25px;">CADASTRO DE USUARIO
-            <img  routerLink="/admin" src="assets/exchange (3).png" alt="" id="change">
+            <img  routerLink="/admin" src="assets/exchange.png" alt="" id="change">
             </div>
 <div class="container-form">
     <form>
@@ -54,10 +54,21 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn" id="save">SALVAR</button>
+        <button type="submit" class="btn" id="save" (click)="confirmarUserDonation()">SALVAR</button>
     </form>
 
-          
+
+    <div *ngIf="isConfirmUserModal" class="modal show d-block"  tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+          <div class="modal-content text-center">
+            <div class="modal-body">
+              <h5 class="modal-title mb-3">Cadastrado salvo com sucesso!</h5>
+              <img src="assets/circle-check.png" alt="Ícone de confirmação" style="width: 60px; margin-top: 10px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
         <div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -71,7 +82,7 @@
             </div>
           </div>
         </div>
-    </div>
+         </div>
         </div>
     </main>
 </body>

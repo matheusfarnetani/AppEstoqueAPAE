@@ -18,7 +18,7 @@
     <main>
       <div id="white">
         <h2 class="form-title" style=" color: #2A455A; font-size: 2.1rem; text-align: center;">DOAÇÃO</h2>
-        <div class="form-container ">
+        <div class="form-container">
           <form>
             <div class="d-flex justify-content-between mb-3" >
               <div class="imput group">
@@ -34,19 +34,32 @@
               <label for="description" class="form-label mb-1" >Descrição</label>
               <textarea class="form-control textarea-custom" id="description"  placeholder="Escreva uma descrição..."></textarea>
             </div>
-            <button type="submit" class="btn btn-custom" id="button">SALVAR</button>
+            <button type="submit" class="btn btn-custom" id="button" (click)="confirmarDon()">SALVAR</button>
           </form>
+
+          <div *ngIf="isConfirmDonModal" class="modal show d-block"  tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+              <div class="modal-content text-center">
+                <div class="modal-body">
+                  <h5 class="modal-title mb-3">Doação salva com sucesso!</h5>
+                  <img src="assets/circle-check.png" alt="Ícone de confirmação" style="width: 60px; margin-top: 10px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
        
   
       <div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
-            <div class="modal-body text-center">
+            <div class="modal-body text-center" style="margin-top: 20px;">
               <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
             </div>
 
-            <div class="modal-footer d-flex justify-content-center" style="margin-right: 35px;" id="btn">
-              <button  routerLink="/" type="button" class="btn btn-success">Sim, desejo sair</button>
+            <div class="modal-footer d-flex justify-content-center" id="btn">
+              <button  routerLink="/" type="button" class="btn btn-success" style="margin-right: 35px;">Sim, desejo sair</button>
               <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
             </div>
           </div>

@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AdminuserComponent {
 
   isModalOpen = false;
+  isConfirmUserModal = false;
 
   abrirModal() {
     this.isModalOpen = true;
@@ -17,4 +18,24 @@ export class AdminuserComponent {
     this.isModalOpen = false;
   }
 
-}
+  ngOnInit(): void {
+    // Verifica se existe uma confirmação no localStorage ao carregar a página
+    if (localStorage.getItem('cadastroSucesso') === 'true') {
+      this.isConfirmUserModal = true;
+      localStorage.removeItem('cadastroSucesso');
+  
+  
+    setTimeout(() => {
+      this.isConfirmUserModal = false;
+     },2000)
+    }
+  }
+  
+  
+  confirmarUserDonation(): void {
+    localStorage.setItem('cadastroSucesso', 'true');
+    // Recarrega a página para simular o envio do formulário
+    location.reload();
+    }
+  }
+

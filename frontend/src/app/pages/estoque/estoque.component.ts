@@ -11,13 +11,15 @@ export class EstoqueComponent {
   isModalOpen = false;
   isAddItemModalOpen = false;
   isRemoveItemModalOpen = false;
+  isConfirmAddModal = false;
+  isConfirmRemoveModal = false;
 
   abrirModal() {
     this.isModalOpen = true;
   }
 
   fecharModal() {
-    this.isModalOpen = false;
+    this.isModalOpen = false; 
   }
 
   abrirAddItemModal() {
@@ -35,4 +37,21 @@ export class EstoqueComponent {
   fecharRemoveItemModal() {
     this.isRemoveItemModalOpen = false;
   }
+
+  confirmarAddItem(){
+    this.isConfirmAddModal = true;
+  
+  setTimeout(() => {
+    this.isConfirmAddModal = false;
+  },2000)
+ }
+
+  confirmarRemoveItem(){
+    this.isConfirmRemoveModal = true;
+  
+  setTimeout(() => {
+    this.isConfirmRemoveModal = false;
+  },2000)
+ }
 }
+
