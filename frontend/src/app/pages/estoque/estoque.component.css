@@ -56,10 +56,22 @@ body {
     display: inline;
     justify-content: space-between;
   }
+
   
 .item-list {
     margin-top: 5px;
     align-items: center;
+}
+
+h1{
+    font-weight: 700;
+
+    
+}
+
+label{
+    font-weight: 700;
+
 }
   
 .item-card {
@@ -226,4 +238,14 @@ body {
 
 #bt{
     margin-left: 35px;
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.modal-footer .btn {
+    width: 120px;
+    font-weight: bold;
 }

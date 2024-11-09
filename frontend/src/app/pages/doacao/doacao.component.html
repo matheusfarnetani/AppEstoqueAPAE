@@ -44,8 +44,9 @@
             <div class="modal-body text-center">
               <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
             </div>
-            <div class="modal-footer d-flex justify-content-center">
-              <button  routerLink="/" type="button" class="btn btn-success"  style="margin-right: 35px;">Sim, desejo sair</button>
+
+            <div class="modal-footer d-flex justify-content-center" style="margin-right: 35px;" id="btn">
+              <button  routerLink="/" type="button" class="btn btn-success">Sim, desejo sair</button>
               <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
             </div>
           </div>
