@@ -11,6 +11,6 @@ import { FormControl } from '@angular/forms';
 export class LoginComponent {
   formulario = new FormGroup({
     email: new FormControl ('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.min(4), Validators.max(8)]),
+    senha: new FormControl ('', [Validators.required, Validators.minLength(4)]),
   })
 }

@@ -75,6 +75,7 @@ label{
     width: 95px;
     height: 133px;
     transform: translate(76%, 0%);
+    cursor: pointer;
 }
 
 .sidenav {

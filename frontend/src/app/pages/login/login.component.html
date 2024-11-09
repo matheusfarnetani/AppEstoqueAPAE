@@ -3,7 +3,7 @@
         <form [formGroup]="formulario" method="POST" class="formLogin">
             <img src="assets/logo-apae.png" alt="logo-apae">
             @if (formulario.get('email')?.hasError('email') && formulario.get('email')?.touched) {
-                <p class="alert alert-warning" style="width: 300px; padding: 5px; margin: auto;">O campo precisa conter o icone de "&#64;"</p>
+                <p class="alert alert-warning" style="width: 225px; padding: 5px; margin: auto; text-align: center; font-weight: 700;">O campo precisa conter "&#64;"</p>
             }
             <input formControlName="email" type="email" placeholder="Digite seu e-mail" class="form-label"/>
             <input formControlName="senha" type="password" placeholder="Digite sua senha" />

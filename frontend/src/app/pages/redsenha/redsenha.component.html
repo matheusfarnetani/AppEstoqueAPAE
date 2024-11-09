@@ -1,15 +1,23 @@
 <body>
     <div class="page">
-        <form [formGroup]="formulario" method="POST" class="formLogin">
-            <h2>Redifinição de Senha</h2>
-            <p>Insira o código que foi enviado pelo e-mail e redefina uma nova senha.</p>
-            <input type="email" placeholder="Insira o Código" autofocus="true" />
-            @if (formulario.get('senha')?.hasError('minlength') && formulario.get('senha')?.touched) {
-                <p class="alert alert-warning" style="width: 300px; padding: 5px; margin: auto; ">Os campos precisam conter no minimo 4 caracteres</p>
-            }
-            <input  formControlName="senha" type="password" placeholder="Digite sua nova senha" autofocus="true" />
-            <input  formControlName="senha" type="password" placeholder="Digite novamente sua senha" />
-            <input routerLink="/" type="submit" value="Redefinir Senha" class="btn" [disabled]="formulario.invalid"/>
-        </form>
+      <form [formGroup]="formulario" method="POST" class="formLogin">
+        <h2>Redefinição de Senha</h2>
+        <p id="texto">Insira o código que foi enviado pelo e-mail e redefina uma nova senha.</p>
+        <input type="email" placeholder="Insira o Código" autofocus="true" />
+        <div *ngIf="formulario.get('senha')?.hasError('minlength') && formulario.get('senha')?.touched">
+          <p class="alert alert-warning" style="width: 330px; padding: 5px; margin: auto; text-align: center; font-weight: 700;">
+            A senha precisa conter no mínimo 4 caracteres.
+          </p>
+        </div>
+        <input formControlName="senha" type="password" placeholder="Digite sua nova senha" />
+        <input formControlName="confirmarSenha" type="password" placeholder="Digite novamente sua senha" />
+        <div *ngIf="formulario.hasError('senhasNaoIguais') && formulario.get('confirmarSenha')?.touched">
+          <p class="alert alert-warning" style="width: 330px; padding: 5px; margin: auto; text-align: center; font-weight: 700;">
+            As senhas não coincidem.
+          </p>
+        </div>
+        <input routerLink="/" type="submit" value="Redefinir Senha" class="btn" [disabled]="formulario.invalid" />
+      </form>
     </div>
-</body>
+  </body>
+  

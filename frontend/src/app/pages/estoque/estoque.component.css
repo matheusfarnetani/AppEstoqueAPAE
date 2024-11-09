@@ -31,6 +31,11 @@ body {
 
 #btn-acess{
     margin-right: 13vh;
+    margin-right: 35px;
+    padding: 8px px;
+    font-size: 0.85rem;
+    border: none;
+    display: inline;
 }
 
 #result{
@@ -50,19 +55,23 @@ body {
 
 .btn {
     margin-right: 35px;
-    padding: 8px 12px;
-    font-size: 0.85rem;
+    padding: 8px px;
+    font-size: 0.90rem;
     border: none;
     display: inline;
     justify-content: space-between;
-    }
+}
+
+#green, #red{
+ margin: 0;
+}
 
 .item-list {
     margin-top: 5px;
     align-items: center;
 }
 
-h1{
+h3{
     font-weight: 700;
 }
 
@@ -126,6 +135,7 @@ label{
     width: 95px;
     height: 133px;
     transform: translate(76%, 0%);
+    cursor: pointer;
 }
 
 .sidenav {
@@ -166,7 +176,6 @@ label{
 }
 
 #name {
-
     padding-left: 60px;
     padding-top: 20px;
     font-size: 14px;
@@ -187,7 +196,6 @@ label{
     margin-bottom: 32px;
     transform: translate(-12%, -180%);
     cursor: pointer;
-
 }
 
 #profile {
@@ -200,7 +208,6 @@ label{
     margin-left: 160px;
     font-size: 28px;
     padding: 0px 10px;
-   
 }
 
 .modal-body h5 {
@@ -208,6 +215,7 @@ label{
     font-weight: bold;
     color: black;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .modal-footer .btn-success {
@@ -236,16 +244,5 @@ label{
     border-color: #bd2130;
 }
 
-#bt{
-    margin-left: 35px;
-}
 
-.modal-title {
-    font-weight: bold;
-    font-size: 1.5rem;
-}
 
-.modal-footer .btn {
-    width: 120px;
-    font-weight: bold;
-}

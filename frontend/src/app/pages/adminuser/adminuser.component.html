@@ -1,7 +1,7 @@
 <body>
     <aside>
         <div class="sidenav">
-            <img src="assets/logo-apae.png" alt="logo-apae" id="logo-aside">
+            <img routerLink="/home" src="assets/logo-apae.png" alt="logo-apae" id="logo-aside">
             <button  routerLink="/admin"   type="button" class="btn btn-dark" data-bs-toggle="button">ADMINISTRAÇÃO</button>
             <button  routerLink="/estoque" type="button" class="btn btn-dark" data-bs-toggle="button">ESTOQUE</button>
             <button  routerLink="/doacao"  type="button" class="btn btn-dark" data-bs-toggle="button">DOAÇÃO</button>
@@ -76,7 +76,7 @@
                 <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
               </div>
               <div class="modal-footer d-flex justify-content-center">
-                <button routerLink="/" type="button" class="btn btn-success"  style="margin-right: 35px;">Sim, desejo sair</button>
+                <button routerLink="/" type="button" class="btn btn-success" style="margin-right: 35px;">Sim, desejo sair</button>
                 <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
               </div>
             </div>

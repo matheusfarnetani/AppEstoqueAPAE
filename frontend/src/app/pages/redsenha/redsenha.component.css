@@ -30,11 +30,11 @@ h2{
     
 }
 
-p{
+#texto{
     text-align: center;
-    font-weight: 500;
-    margin-top: 35px;
-    font-size: 19px;
+    font-weight: 600;
+    margin-top: 30px;
+    font-size: 18px;
     color: #353030;
 }
 
