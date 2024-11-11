@@ -30,7 +30,13 @@
             <div id="btn-acess">
               <button class="btn btn-primary" style="font-weight: bold;" (click)="abrirAddItemModal()">+ Adicionar Item</button>
               <button class="btn btn-primary" style="font-weight: bold;" (click)="abrirRemoveItemModal()">- Remover Item</button>
-              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Filtro</button>
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><strong>Filtro</strong></button>
+              <ul class="dropdown-menu" style="text-align: center; cursor: pointer;">
+                <li><a class="dropdown-item" (click)="selecionarFiltro('Produto')">Produto</a></li>
+                <li><a class="dropdown-item" (click)="selecionarFiltro('Data')">Data</a></li>
+                <li><a class="dropdown-item" (click)="selecionarFiltro('Quantidade')">Quantidade</a></li>
+                <li><a class="dropdown-item" (click)="selecionarFiltro('Status')">Status</a></li>
+              </ul>
 
         <div *ngIf="isAddItemModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
           <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -148,13 +154,11 @@
   </div>
 </div>
 
-
-          <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="d-flex justify-content-between align-items-center mb-1">
             <span id="result">Foram achados <strong>9</strong> itens</span>
             <div id="filter">
-              Sort by:
-              <a class="text-decoration-none">Date</a>
-              <i class="bi bi-caret-down-fill"></i>
+              <p *ngIf="!filtroSelecionado">Nenhum filtro aplicado</p>
+              <p *ngIf="filtroSelecionado">Filtra por: <a class="text-decoration-none">{{ filtroSelecionado }}</a></p>
             </div>
           </div>
           <div id="item-list" style="width: 100%; overflow-y: scroll; max-height: 300px;">

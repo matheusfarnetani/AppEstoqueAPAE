@@ -53,5 +53,10 @@ export class EstoqueComponent {
     this.isConfirmRemoveModal = false;
   },2000)
  }
-}
 
+ filtroSelecionado: string = ''; 
+
+  selecionarFiltro(filtro: string): void {
+    this.filtroSelecionado = filtro;
+  }
+}
