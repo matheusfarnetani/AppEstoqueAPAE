@@ -20,20 +20,20 @@
             <img  routerLink="/admin" src="assets/exchange.png" alt="" id="change">
             </div>
 <div class="container-form">
-    <form>
+    <form [formGroup]="formulario" method="POST" class="formLogin">
         <div class="row mb-3">
             <div class="col-md-5">
                 <div class="mb-3">
                     <label for="nomeDoador" class="form-label">Nome e Sobrenome</label>
-                    <input type="text" class="form-control" id="nomeDoador" placeholder="Digite seu nome">
+                    <input formControlName="nome" type="text" class="form-control" id="nomeDoador" placeholder="Digite seu nome">
                 </div>
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" placeholder="Crie sua senha">
+                    <input  formControlName="senha" type="password" class="form-control" id="senha" placeholder="Crie sua senha">
                 </div>
                 <div class="mb-3">
                     <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="dataNascimento">
+                    <input formControlName="data" type="date" class="form-control" id="dataNascimento">
                 </div>
             </div>
 
@@ -43,18 +43,22 @@
             </div>
 
         
-            <div class="col-md-5" style="padding-top: 35px;">
+            <div class="col-md-5" style="padding-top: 2px;">
+                <div class="mb-3">
+                   <label for="email" class="form-label">Email</label>
+                   <input formControlName="email" type="email" class="form-control" id="email" placeholder="Digite seu email">
+                </div>
                 <div class="mb-3">
                     <label for="telefone" class="form-label">Telefone</label>
-                    <input type="tel" class="form-control" id="telefone" placeholder="Digite seu telefone">
+                    <input formControlName="telefone" type="tel" class="form-control" id="telefone" placeholder="Digite seu telefone">
                 </div>
                 <div class="mb-3">
                     <label for="cpfCnpj" class="form-label">CPF</label>
-                    <input type="text" class="form-control" id="cpfCnpj" placeholder="Digite seu CPF">
+                    <input formControlName="cpf"type="text" class="form-control" id="cpfCnpj" placeholder="Digite seu CPF">
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn" id="save" (click)="confirmarUserDonation()">SALVAR</button>
+        <button type="submit" class="btn" id="save" (click)="confirmarUserDonation()" [disabled]="formulario.invalid">SALVAR</button>
     </form>
 
 

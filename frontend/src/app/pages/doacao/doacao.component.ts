@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-doacao',
@@ -19,7 +21,6 @@ export class DoacaoComponent {
   }
 
   ngOnInit(): void {
-    // Verifica se existe uma confirmação no localStorage ao carregar a página
     if (localStorage.getItem('cadastroSucesso') === 'true') {
       this.isConfirmDonModal = true;
       localStorage.removeItem('cadastroSucesso');
@@ -34,7 +35,13 @@ export class DoacaoComponent {
   
   confirmarDon(): void {
     localStorage.setItem('cadastroSucesso', 'true');
-    // Recarrega a página para simular o envio do formulário
     location.reload();
     }
+
+
+    formulario = new FormGroup({
+      id: new FormControl ('', [Validators.required]),
+      data: new FormControl ('', [Validators.required]),
+      desc: new FormControl ('', [Validators.required]),
+    })
   }

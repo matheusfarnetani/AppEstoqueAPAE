@@ -21,12 +21,12 @@
             </div>
           
 <div class="container-form">
-    <form style="margin-bottom: 12rem;">
+    <form [formGroup]="formulario" method="POST" class="formLogin" style="margin-bottom: 12rem;">
         <div class="row mb-3">
             <div class="col-md-5">
                 <div class="mb-2">
                     <label for="nomeDoador" class="form-label">Nome Doador / Empresa</label>
-                    <input type="text" class="form-control" id="nomeDoador" placeholder="Digite seu nome">
+                    <input formControlName="nome" type="text" class="form-control" id="nomeDoador" placeholder="Digite seu nome">
                 </div>
                 <div class="mb-3 form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="tipoPessoa" id="pessoaFisica" value="fisica">
@@ -38,15 +38,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="cpfCnpj" class="form-label">CPF / CNPJ</label>
-                    <input type="text" class="form-control" id="cpfCnpj" placeholder="Digite seu CPF ou CNPJ">
+                    <input formControlName="cpf" type="text" class="form-control" id="cpfCnpj" placeholder="Digite seu CPF ou CNPJ">
                 </div>
                 <div class="mb-3">
                     <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="dataNascimento">
+                    <input formControlName="data" type="date" class="form-control" id="dataNascimento">
                 </div>
                 <div class="mb-3">
                     <label for="telefone" class="form-label">Telefone</label>
-                    <input type="tel" class="form-control" id="telefone" placeholder="Digite seu telefone">
+                    <input  formControlName="telefone" type="tel" class="form-control" id="telefone" placeholder="Digite seu telefone">
                 </div>
             </div>
 
@@ -57,16 +57,16 @@
 
             <div class="col-md-5" style="padding-top: 25px;">
                 <div class="mb-3">
-                    <label for="endereco" class="form-label">Endereço Completo</label>
-                    <input type="text" class="form-control" id="endereco" placeholder="Digite seu endereço">
+                    <label for="endereco" class="form-label">Endereço</label>
+                    <input formControlName="end" type="text" class="form-control" id="endereco" placeholder="Digite seu endereço">
                 </div>
                 <div class="mb-3">
                     <label for="cidadeEstado" class="form-label">Cidade / Estado</label>
-                    <input type="text" class="form-control" id="cidadeEstado" placeholder="Digite sua cidade e estado">
+                    <input formControlName="cidade" type="text" class="form-control" id="cidadeEstado" placeholder="Digite sua cidade e estado">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+                    <input formControlName="email" type="email" class="form-control" id="email" placeholder="Digite seu email">
                 </div>
                 <div class="mb-3">
                     <label for="lorem" class="form-label">Lorem</label>
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn" id="save" (click)="confirmarCadDonation()">SALVAR</button>
+        <button type="submit" class="btn" id="save" (click)="confirmarCadDonation()" [disabled]="formulario.invalid">SALVAR</button>
     </form>
 
 

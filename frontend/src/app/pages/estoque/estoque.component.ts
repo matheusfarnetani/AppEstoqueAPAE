@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-estoque',
@@ -59,4 +59,17 @@ export class EstoqueComponent {
   selecionarFiltro(filtro: string): void {
     this.filtroSelecionado = filtro;
   }
+
+
+  formulario = new FormGroup({
+    idcons: new FormControl ('', [Validators.required]),
+    quant: new FormControl ('', [Validators.required]),
+    unidade: new FormControl ('', [Validators.required]),
+    iddoacao: new FormControl ('', [Validators.required]),
+    dataentrada: new FormControl ('', [Validators.required]),
+    dataval: new FormControl ('', [Validators.required]),
+    datasaida: new FormControl ('', [Validators.required,]),
+    obs: new FormControl ('', [Validators.required]),
+
+  })
 }

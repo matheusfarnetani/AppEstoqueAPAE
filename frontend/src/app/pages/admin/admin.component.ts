@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
+
 export class AdminComponent {
 
   isModalOpen = false;
@@ -22,7 +25,6 @@ export class AdminComponent {
 
 
  ngOnInit(): void {
-  // Verifica se existe uma confirmação no localStorage ao carregar a página
   if (localStorage.getItem('cadastroSucesso') === 'true') {
     this.isConfirmDonationModal = true;
     localStorage.removeItem('cadastroSucesso');
@@ -37,7 +39,17 @@ export class AdminComponent {
 
 confirmarCadDonation(): void {
   localStorage.setItem('cadastroSucesso', 'true');
-  // Recarrega a página para simular o envio do formulário
   location.reload();
   }
+
+
+  formulario = new FormGroup({
+    nome: new FormControl ('', [Validators.required]),
+    cpf: new FormControl ('', [Validators.required]),
+    data: new FormControl ('', [Validators.required]),
+    telefone: new FormControl ('', [Validators.required]),
+    end: new FormControl ('', [Validators.required]),
+    cidade: new FormControl ('', [Validators.required]),
+    email: new FormControl ('', [Validators.required, Validators.email]),
+  })
 }

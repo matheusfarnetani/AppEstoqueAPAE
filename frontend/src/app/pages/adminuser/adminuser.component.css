@@ -6,6 +6,11 @@ body {
     height: 100vh; 
 }
 
+label{
+    font-weight: 700;
+    color: #2A455A;
+}
+
 #white {
     background-color: #F8F8F8;
     width: 1080px;

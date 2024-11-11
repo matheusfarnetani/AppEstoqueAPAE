@@ -19,22 +19,22 @@
       <div id="white">
         <h2 class="form-title" style=" color: #2A455A; font-size: 2.1rem; text-align: center;">DOAÇÃO</h2>
         <div class="form-container">
-          <form>
-            <div class="d-flex justify-content-between mb-3" >
+          <form [formGroup]="formulario" method="POST" class="formLogin">
+            <div class="d-flex justify-content-between mb-3">
               <div class="imput group">
                 <label for="donorId" class="form-label mb-0">ID do Doador</label>
-                <input type="text" class="form-control " id="donorId" placeholder="Digite o ID"/>
+                <input formControlName="id" type="text" class="form-control " id="donorId" placeholder="Digite o ID"/>
               </div>
               <div class="imput group mb-3">
                 <label for="donationDate" class="form-label mb-0">Data da Doação</label >
-                <input type="date" class="form-control" id="donationDate" />
+                <input formControlName="data" type="date" class="form-control" id="donationDate" />
               </div>
             </div>
             <div class="imput group">
               <label for="description" class="form-label mb-1" >Descrição</label>
-              <textarea class="form-control textarea-custom" id="description"  placeholder="Escreva uma descrição..."></textarea>
+              <textarea formControlName="desc" class="form-control textarea-custom" id="description"  placeholder="Escreva uma descrição..."></textarea>
             </div>
-            <button type="submit" class="btn btn-custom" id="button" (click)="confirmarDon()">SALVAR</button>
+            <button type="submit" class="btn btn-custom" id="button" (click)="confirmarDon()" [disabled]="formulario.invalid">SALVAR</button>
           </form>
 
           <div *ngIf="isConfirmDonModal" class="modal show d-block"  tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
