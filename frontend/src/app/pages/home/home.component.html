@@ -1,37 +1,44 @@
-<body>
-    <aside>
-        <div class="sidenav">
-            <img src="assets/logo-apae.png" alt="logo-apae" id="logo-aside">
-            <button routerLink="/admin"  type="button" class="btn btn-dark" data-bs-toggle="button">ADMINISTRAÇÃO</button>
-            <button routerLink="/estoque" type="button" class="btn btn-dark" data-bs-toggle="button">ESTOQUE</button>
-            <button routerLink="/doacao" type="button" class="btn btn-dark" data-bs-toggle="button">DOAÇÃO</button>
-            <div class="line">
-                <p id="name"><strong>Leticia Campos</strong></p>
-                <p id="job">Nutricionista</p>
-                <img (click)="abrirModal()" src="assets/sair.png" alt="" id="out">
-                <a ><img src="assets/Foto.png" alt="p" id="profile"> </a>
-            </div>
-        </div>
-    </aside>
-
-    <main>
-        <div id="white">
-            <h1 id="name_profile">BOM DIA, <br>LETICIA CAMPOS!</h1>
-            <img src="assets/logo-apae.png" alt="" id="principal_logo">
-            
-<div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
+<body class="bg-[#2A455A] h-screen">
+  <aside class="fixed top-0 left-0 w-fit h-100 bg-[#2A455A] flex flex-col items-center justify-center px-3">
+    <img src="assets/logo-apae.png" alt="logo-apae" class="w-[95px] h-[133px] mb-4">
+    
+    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/admin">
+      ADMINISTRAÇÃO
+    </button>
+    
+    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/estoque">
+      ESTOQUE
+    </button>
+    
+    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/doacao">
+      DOAÇÃO
+    </button>
+    
+    <div class="w-full border-t border-white mt-10 px-5 flex flex-col items-center">
+      <p class="text-white text-sm mt-5 font-bold">Leticia Campos</p>
+      <p class="text-white text-xs">Nutricionista</p>
+      <div class="flex items-center gap-4 mt-4">
+        <img src="assets/sair.png" alt="logout" class="w-7 h-7 cursor-pointer" (click)="abrirModal()">
+        <img src="assets/Foto.png" alt="profile" class="w-[43px] h-[43px] rounded-full">
       </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button routerLink="/" type="button" class="btn btn-success"  style="margin-right: 35px;" >Sim, desejo sair</button>
-        <button type="button" class="btn btn-danger" (click)="fecharModal()">Não, desejo ficar</button>
+    </div>
+  </aside>
+  
+  <main class="flex flex-col items-center justify-center h-5/6 bg-[#F8F8F8] text-center px-8">
+    <h1 class="text-5xl font-bold">BOM DIA, <br>LETICIA CAMPOS!</h1>
+    <img src="assets/logo-apae.png" alt="principal logo" class="w-[185px] h-[265px] mt-8">
+  </main>
+  
+  <!-- Modal -->
+  <div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-[400px]">
+      <div class="text-center mb-4">
+        <h5 class="text-xl font-bold">Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
+      </div>
+      <div class="flex justify-center gap-8">
+        <button routerLink="/" class="px-5 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition duration-200">Sim, desejo sair</button>
+        <button (click)="fecharModal()" class="px-5 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition duration-200">Não, desejo ficar</button>
       </div>
     </div>
   </div>
-</div>
-</div>
-</main> 
 </body>

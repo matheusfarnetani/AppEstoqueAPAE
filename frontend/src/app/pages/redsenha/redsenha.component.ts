@@ -6,7 +6,6 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-redsenha',
   templateUrl: './redsenha.component.html',
-  styleUrl: './redsenha.component.css'
 })
 export class RedsenhaComponent {
   formulario: FormGroup;
@@ -20,7 +19,7 @@ export class RedsenhaComponent {
           Validators.minLength(4)  // Validação para comprimento mínimo de 4 caracteres
         ]),
         confirmarSenha: new FormControl('', [
-          Validators.required  // Apenas obrigatoriedade de preenchimento
+          Validators.required
         ])
       },
       {

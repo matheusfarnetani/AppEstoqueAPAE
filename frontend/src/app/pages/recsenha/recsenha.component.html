@@ -1,14 +1,56 @@
-<body>
-    <div class="page">
-        <form [formGroup]="formulario" method="POST" class="formLogin">
-            <h2>Recuperação de Senha</h2>
-            <p id="texto">Digite seu e-mail no campo abaixo e lhe enviaremos um link para redefini-la.</p>
-            @if (formulario.get('email')?.hasError('email') && formulario.get('email')?.touched) {
-              <p class="alert alert-warning" style="width: 225px; padding: 5px; margin: auto; text-align: center; font-weight: 700;">O campo precisa conter "&#64;"</p>
-            }
-            <input  formControlName="email" type="email" placeholder="Digite seu e-mail" autofocus="true"/>
-            <input  routerLink="/redsenha" type="submit" value="Redefinir Senha" class="btn" [disabled]="formulario.invalid">
-            <button routerLink="/" type="submit" class="btn" id="voltar">Voltar a tela de login</button>
-        </form>
-    </div>
+<body class="h-screen bg-custom-gradient flex items-center justify-center">
+  <div
+    class="w-1/3 max-w-screen-sm h-screen max-h-[500px] shadow-lg rounded-lg bg-blue-100 p-11 flex justify-center items-center text-lg"
+  >
+    <form
+      [formGroup]="formulario"
+      method="POST"
+      class="flex flex-col items-center w-full gap-7"
+    >
+      <h2 class="font-bold text-2xl text-black mb-4 text-center">
+        Recuperação de Senha
+      </h2>
+      <p id="texto" class="text-center font-semibold text-gray-700">
+        Digite seu e-mail no campo abaixo e lhe enviaremos um link para
+        redefini-la.
+      </p>
+
+      
+
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="Digite seu e-mail"
+        autofocus="true"
+        class="w-full p-3 text-lg border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-green-500 transition-all duration-150"
+      />
+
+      @if (formulario.get('email')?.hasError('email') &&
+      formulario.get('email')?.touched) {
+      <p class="w-100 p-2 mx-auto text-center font-bold bg-red-200 text-red-800 rounded">
+        O campo precisa conter "&#64;"
+      </p>
+      }
+
+      <div
+        class="gap-x-20 md:gap-y-5 flex flex-row items-center justify-between md:justify-center text-md w-100 px-4 flex-wrap"
+      >
+        <input
+          routerLink="/redsenha"
+          type="submit"
+          value="Redefinir Senha"
+          class="bg-green-600 text-white font-bold transition-all duration-150 cursor-pointer h-14 w-full md:w-48 rounded-lg hover:scale-105 hover:bg-green-700 disabled:hover:scale-100  disabled:bg-gray-400 disabled:hover:bg-gray-400 hover:scale-105 disabled:cursor-not-allowed"
+          [disabled]="formulario.invalid"
+        />
+
+        <button
+          routerLink="/"
+          type="button"
+          class="bg-red-600 text-white font-bold transition-all duration-150 cursor-pointer h-14 w-full md:w-48 rounded-lg hover:scale-105 hover:bg-red-700"
+        >
+          Voltar à tela de login
+        </button>
+      </div>
+    </form>
+  </div>
 </body>
