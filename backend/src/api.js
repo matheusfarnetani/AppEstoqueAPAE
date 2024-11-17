@@ -1,19 +1,24 @@
 const express = require("express");
-const api = express();
-const routes = require("./routes/routes");
 const cors = require("cors");
+
+const app = express();
 
 const corsOptions = {
   origin: "*", // Allow all origins
-//   origin: ['https://your-app.com', 'http://localhost:4200'],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };
 
-api.use(express.urlencoded({ extended: false }));
-api.use(express.json());
+app.use(cors(corsOptions)); // Apply CORS middleware
+app.use(express.json()); // Parse JSON bodies
 
-api.use("/api", routes);
-api.use(cors(corsOptions));
+// Example route
+app.post("/api/users/login", (req, res) => {
+  res.json({ message: "Login successful!" });
+});
 
-module.exports = api;
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
