@@ -10,9 +10,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { EstoqueComponent } from './pages/estoque/estoque.component';
 import { DoacaoComponent } from './pages/doacao/doacao.component';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AdminuserComponent } from './pages/adminuser/adminuser.component';
+import { HttpClientModule } from '@angular/common/http'; // Adicionado para HttpClient
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CorsInterceptor } from '../cors.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,9 +34,13 @@ import { AdminuserComponent } from './pages/adminuser/adminuser.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule, 
+    CommonModule, 
+    
 
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
