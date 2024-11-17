@@ -6,6 +6,9 @@ const authMiddleware = require("../middlewares/authMiddleware.js");
 
 const UsersController = require("../controllers/UsersController.js");
 
+// Login
+router.post("/login", UsersController.login);
+
 // Create Users
 router.post("/create", authMiddleware(), UsersController.create);
 

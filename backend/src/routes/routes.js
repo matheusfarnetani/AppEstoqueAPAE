@@ -3,9 +3,6 @@
 const express = require("express");
 const router = express.Router();
 
-// Middlewares
-// const authMiddleware = require("../middlewares/authMiddleware.js");
-
 // Routers
 const routerUsers = require("./rt_users.js");
 const routerEnderecos = require("./rt_enderecos.js");
@@ -22,12 +19,6 @@ const routerEstoqueEntrada = require("./rt_estoqueEntrada.js");
 const routerEstoque = require("./rt_estoque.js");
 const routerEstoqueSaida = require("./rt_estoqueSaida.js");
 const routerEstoqueVencido = require("./rt_estoqueVencido.js");
-
-// Controllers
-const UsersController = require("../controllers/UsersController");
-
-// Free routes
-router.post("/login", UsersController.login);
 
 // API
 router.use("/users", routerUsers);
