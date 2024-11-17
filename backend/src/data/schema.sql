@@ -88,7 +88,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `db_apae_estoque`.`categoria_insumos` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -1483,7 +1484,7 @@ USE `db_apae_estoque`;
 CREATE OR REPLACE VIEW `view_insumos_vencidos_descartados` AS
 SELECT 
     v.id AS estoque_vencido_id,
-    v.insumos_id,
+    v.insumos_id,  -- Include insumos_id
     i.nome AS `nome_insumo`,
     v.quantidade,
     um.nome AS `unidade_medida`,

@@ -30,21 +30,21 @@ const UsersController = require("../controllers/UsersController");
 router.post("/login", UsersController.login);
 
 // API
-router.use("/api/users", routerUsers);
-router.use("/api/enderecos", routerEnderecos);
-router.use("/api/telefones", routerTelefone);
-router.use("/api/pessoas", routerPessoas);
-router.use("/api/doacoes", routerDoacoes);
-router.use("/api/pedidos", routerPedidos);
-router.use("/api/itens_pedidos", routerItensPedidos);
-router.use("/api/unidade_medida", routerUnidadeMedida);
-router.use("/api/categoria_insumo", routerCategoriaInsumo);
-router.use("/api/valores_nutricionais", routerValoresNutricionais);
-router.use("/api/insumos", routerInsumos);
-router.use("/api/estoque_entrada", routerEstoqueEntrada);
-router.use("/api/estoque", routerEstoque);
-router.use("/api/estoque_saida", routerEstoqueSaida);
-router.use("/api/estoque_vencido", routerEstoqueVencido);
+router.use("/users", routerUsers);
+router.use("/enderecos", routerEnderecos);
+router.use("/telefones", routerTelefone);
+router.use("/pessoas", routerPessoas);
+router.use("/doacoes", routerDoacoes);
+router.use("/pedidos", routerPedidos);
+router.use("/itens_pedidos", routerItensPedidos);
+router.use("/unidade_medida", routerUnidadeMedida);
+router.use("/categoria_insumo", routerCategoriaInsumo);
+router.use("/valores_nutricionais", routerValoresNutricionais);
+router.use("/insumos", routerInsumos);
+router.use("/estoque_entrada", routerEstoqueEntrada);
+router.use("/estoque", routerEstoque);
+router.use("/estoque_saida", routerEstoqueSaida);
+router.use("/estoque_vencido", routerEstoqueVencido);
 
 // Custom 404
 router.all("*", (req, res) => {
