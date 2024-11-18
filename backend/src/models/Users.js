@@ -42,7 +42,7 @@ class User extends BaseModel {
     try {
       // Make sure to select the 'id' along with other fields
       let user = await knex(this.tableName)
-        .select(["id", "email", "senha", "funcao"]) // Include 'id' here
+        .select(["id", "username", "email", "senha", "funcao"]) // Include 'id' here
         .where({ email })
         .first();
 
