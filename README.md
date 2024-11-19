@@ -1,47 +1,47 @@
-# Projeto de Gerenciamento de Estoque para a Apae de São João da Boa Vista
+# Stock Management Project for Apae de São João da Boa Vista
 
-Este repositório faz parte de um projeto desenvolvido como trabalho de faculdade, em parceria com a ONG Apae de São João da Boa Vista. A iniciativa tem como objetivo criar um aplicativo para automatizar o gerenciamento do estoque de insumos utilizados na alimentação dos alunos da escola, oferecendo lanches e almoços. Este software surge da necessidade de controle rigoroso das datas de validade dos insumos, garantindo a qualidade e segurança dos alimentos fornecidos.
+This repository is part of a project developed as a college assignment, in partnership with the NGO Apae de São João da Boa Vista. The initiative aims to create an application to automate the management of the stock of supplies used in feeding the school's students, providing snacks and lunches. This software arises from the need for strict control of the expiration dates of supplies, ensuring the quality and safety of the food provided.
 
-Para atender a essa demanda, desenvolvemos um banco de dados MySQL robusto, com diversas automatizações como triggers, procedures, functions e events, que garantem o controle das datas de validade e a movimentação dos itens no estoque. A aplicação consiste em três componentes principais:
+To meet this demand, we developed a robust MySQL database with several automations such as triggers, procedures, functions, and events, which ensure the control of expiration dates and the movement of items in the inventory. The application consists of three main components:
 
-- **Backend**: Uma API desenvolvida em Node.js, responsável pela comunicação com o banco de dados e pelas lógicas do sistema.
-- **Frontend**: Uma interface web criada em Angular 17, que permite aos usuários interagirem de forma intuitiva com o sistema de gerenciamento de estoque.
-- **Database**: Um banco de dados MySQL que armazena todas as informações relacionadas aos insumos, incluindo suas datas de validade e status no estoque.
+- **Backend**: An API developed in Node.js, responsible for communication with the database and system logic.
+- **Frontend**: A web interface created in Angular 17, which allows users to interact intuitively with the inventory management system.
+- **Database**: A MySQL database that stores all information related to supplies, including their expiration dates and inventory status.
 
-## Estrutura do Repositório
+## Repository Structure
 
-- **database/**: Contém os scripts SQL para criação das tabelas, triggers, procedures, functions e events.
-- **backend/**: Implementação da API em Node.js, seguindo o padrão MVC (Model-View-Controller) para garantir a organização e manutenção do código.
-- **frontend/**: Código do aplicativo web desenvolvido em Angular 17.
+- **database/**: Contains SQL scripts for creating tables, triggers, procedures, functions, and events.
+- **backend/**: Implementation of the API in Node.js, following the MVC (Model-View-Controller) pattern to ensure code organization and maintainability.
+- **frontend/**: Web application code developed in Angular 17.
 
-## Como Executar o Projeto
+## How to Run the Project
 
-Para executar o projeto localmente, siga os seguintes passos:
+To run the project locally, follow these steps:
 
-### 1. Clone o Repositório
+### 1. Clone the Repository
 
-Clone o repositório para sua máquina local usando o comando:
+Clone the repository to your local machine using the command:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/your-username/your-repository.git
 ```
 
-### 2. Banco de Dados
+### 2. Database
 
-1. Navegue até a pasta `database` e execute os scripts SQL no seu servidor MySQL para criar o banco de dados e configurar todas as tabelas e automatizações.
-2. Certifique-se de que o MySQL está rodando e configurado corretamente.
+1. Navigate to the `database` folder and execute the SQL scripts on your MySQL server to create the database and set up all tables and automations.
+2. Make sure MySQL is running and properly configured.
 
 ### 3. Backend (API)
 
-1. Navegue até a pasta `backend`.
-2. Instale as dependências necessárias utilizando o npm:
+1. Navigate to the `backend` folder.
+2. Install the necessary dependencies using npm:
 
 ```bash
 npm install
 ```
 
-3. Configure as variáveis de ambiente para a conexão com o banco de dados (pode ser criado um arquivo `.env` com as credenciais).
-4. Inicie o servidor Node.js:
+3. Configure the environment variables for database connection (you can create a `.env` file with the credentials).
+4. Start the Node.js server:
 
 ```bash
 npm start
@@ -49,64 +49,64 @@ npm start
 
 ### 4. Frontend
 
-1. Navegue até a pasta `frontend`.
-2. Instale as dependências necessárias utilizando o npm:
+1. Navigate to the `frontend` folder.
+2. Install the necessary dependencies using npm:
 
 ```bash
 npm install
 ```
 
-3. Inicie o servidor de desenvolvimento do Angular:
+3. Start the Angular development server:
 
 ```bash
 ng serve
 ```
 
-4. Acesse a aplicação no navegador pelo endereço `http://localhost:4200`.
+4. Access the application in the browser at `http://localhost:4200`.
 
-## Instruções para Rodar a API Completamente
+## Instructions to Fully Run the API
 
-### 1. Configurar arquivo .env:
+### 1. Configure .env File:
 
 ```bash
 ./env.txt > .env
 ```
 
-### 2. Criar Banco de Dados:
+### 2. Create Database:
 
 ```bash
 ./database/schema.sql
 ```
 
-### 3. Criar Usuário Administrador
+### 3. Create Admin User
 
 ```bash
 node ./database/first_user.js
 ```
 
-### 4. Popular Banco de Dados
+### 4. Populate Database
 
 ```bash
-./database/insert_completo.sql
+./database/inser_completo.sql
 ```
 
-### 5. Adicionar Evento Diário
+### 5. Add Daily Event
 
 ```bash
 ./database/event_atualizar_status_estoque.sql
 ```
 
-## Funcionalidades Principais
+## Main Features
 
-- **Controle de Estoque**: Visualização dos itens em estoque, com destaque para itens próximos da data de validade.
-- **Automatização de Processos**: A utilização de triggers e events garante que itens vencidos sejam movidos para a tabela correta, facilitando o controle.
-- **Interface Amigável**: A interface desenvolvida em Angular permite uma navegação intuitiva para os usuários da ONG.
+- **Inventory Control**: View items in stock, highlighting items nearing their expiration date.
+- **Process Automation**: The use of triggers and events ensures that expired items are moved to the correct table, facilitating control.
+- **User-Friendly Interface**: The interface developed in Angular allows intuitive navigation for NGO users.
 
-## Diagramas
+## Diagrams
 
-Em breve, serão adicionados diagramas para melhor ilustrar a estrutura do projeto. Pretendemos incluir um diagrama explicando o modelo lógico do banco de dados, para ajudar a compreender como as tabelas estão relacionadas e como ocorre a gestão dos insumos.
+Diagrams will be added soon to better illustrate the project structure. We intend to include a diagram explaining the logical model of the database to help understand how the tables are related and how supply management is handled.
 
-## Licença
+## License
 
-Este projeto é de uso interno da Apae de São João da Boa Vista e está sendo desenvolvido para fins acadêmicos.
+This project is for internal use by Apae de São João da Boa Vista and is being developed for academic purposes.
 
