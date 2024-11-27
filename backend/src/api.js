@@ -10,7 +10,13 @@ const corsOptions = {
   // If you want to restrict origins, uncomment and use the following:
   // origin: ['https://your-app.com', 'http://localhost:4200'],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Origin",
+    "Access-Control-Allow-Methods",
+  ], // Allowed headers
 };
 
 // Apply middleware
