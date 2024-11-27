@@ -1,0 +1,18 @@
+.item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .item-status.fechado {
+    color: red;
+  }
+  
+  .item-status.aberto {
+    color: green;
+  }
+  
