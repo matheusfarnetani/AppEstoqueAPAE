@@ -12,7 +12,7 @@ class UsersController {
     if (result.status) {
       res
         .status(200)
-        .json({ success: true, message: "Usuário cadastrado com sucesso!" });
+        .json({ success: true, message: "Usuário cadastrado com sucesso!", id: result.id });
     } else {
       res.status(400).json({ success: false, message: result.err });
     }

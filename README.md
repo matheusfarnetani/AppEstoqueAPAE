@@ -81,7 +81,7 @@ ng serve
 ### 3. Create Admin User
 
 ```bash
-node ./database/first_user.js
+node ./backend/src/data/first_user.js
 ```
 
 ### 4. Populate Database
