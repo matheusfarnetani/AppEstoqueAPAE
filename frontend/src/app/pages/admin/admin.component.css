@@ -13,12 +13,6 @@ label{
 
 #white {
     background-color: #F8F8F8;
-    width: 1080px;
-    height: 622px;
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    transform: translate(-39%, -50%);
     display: flex;
     justify-items: center;
     align-items: center;
@@ -69,11 +63,6 @@ label{
     font-weight: bold;
     border-radius: 5px;
     margin-top: 1.3rem;
-    margin-left: 19.2rem;
-}
-
-.form-label{
-    margin-bottom: 0.15rem;
 }
 
 #principal_logo {
@@ -159,12 +148,6 @@ label{
     height: 43px;
     width: 43px;
     transform: translate(5%, -265%);
-}
-
-.main {
-    margin-left: 160px;
-    font-size: 28px;
-    padding: 0px 10px;
 }
 
 .modal-body h5 {

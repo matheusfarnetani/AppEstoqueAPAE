@@ -1,25 +1,52 @@
 <body>
-  <aside class="fixed top-0 left-0 w-fit h-100 bg-[#2A455A] flex flex-col items-center justify-center px-3">
-    <img  routerLink="/home" src="assets/logo-apae.png" alt="logo-apae" class="w-[95px] h-[133px] mb-4">
-    
-    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/admin">
+  <aside
+    class="fixed top-0 left-0 w-fit h-100 bg-[#2A455A] flex flex-col items-center justify-center px-3 border-r-[1px] border-[#FFFFFF20]"
+  >
+    <img
+      routerLink="/home"
+      src="assets/logo-apae.png"
+      alt="logo-apae"
+      class="w-[95px] h-[133px] mb-4"
+    />
+
+    <button
+      class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300"
+      routerLink="/admin"
+    >
       ADMINISTRAÇÃO
     </button>
-    
-    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/estoque">
+
+    <button
+      class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300"
+      routerLink="/estoque"
+    >
       ESTOQUE
     </button>
-    
-    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/doacao">
+
+    <button
+      class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300"
+      routerLink="/doacao"
+    >
       DOAÇÃO
     </button>
-    
-    <div class="w-full border-t border-white mt-10 px-5 flex flex-col items-center">
-      <p class="text-white text-sm mt-5 font-bold">{{name}}</p>
+
+    <div
+      class="w-full border-t border-white mt-10 px-5 flex flex-col items-center"
+    >
+      <p class="text-white text-sm mt-5 font-bold">{{ name }}</p>
       <p class="text-white text-xs">Nutricionista</p>
       <div class="flex items-center gap-4 mt-4">
-        <img src="assets/sair.png" alt="logout" class="w-7 h-7 cursor-pointer" (click)="abrirModal()">
-        <img src="assets/Foto.png" alt="profile" class="w-[43px] h-[43px] rounded-full">
+        <img
+          src="assets/sair.png"
+          alt="logout"
+          class="w-7 h-7 cursor-pointer"
+          (click)="abrirModal()"
+        />
+        <img
+          src="assets/Foto.png"
+          alt="profile"
+          class="w-[43px] h-[43px] rounded-full"
+        />
       </div>
     </div>
   </aside>
@@ -30,7 +57,6 @@
         <div class="header-title">QUADRO DE ESTOQUE</div>
 
         <div class="d-flex justify-content-between mb-5">
-
           <div id="btn-acess">
             <button
               class="btn btn-primary"
@@ -79,7 +105,7 @@
                             >ID do Insumo</label
                           >
                           <input
-                            formControlName="idcons"
+                            formControlName="insumos_id"
                             type="text"
                             class="form-control"
                             id="inputInsumoId"
@@ -91,7 +117,7 @@
                             >ID da Doação</label
                           >
                           <input
-                            formControlName="iddoacao"
+                            formControlName="doacoes_id"
                             type="text"
                             class="form-control"
                             id="inputDoacaoId"
@@ -101,11 +127,11 @@
                       </div>
                       <div class="row mb-3">
                         <div class="col">
-                          <label for="inputQuantidade" class="form-label"
+                          <label for="quantidade" class="form-label"
                             >Quantidade</label
                           >
                           <input
-                            formControlName="quant"
+                            formControlName="quantidade"
                             type="number"
                             class="form-control"
                             id="inputQuantidade"
@@ -130,7 +156,7 @@
                             >Unidade de Medida</label
                           >
                           <input
-                            formControlName="unidade"
+                            formControlName="unidades_medida_id"
                             type="text"
                             class="form-control"
                             id="inputUnidadeMedida"
@@ -142,7 +168,7 @@
                             >Data de Validade</label
                           >
                           <input
-                            formControlName="dataval"
+                            formControlName="data_validade"
                             type="date"
                             class="form-control"
                             id="inputDataValidade"
@@ -322,12 +348,10 @@
         id="item-list"
         style="width: 100%; overflow-y: scroll; max-height: 300px"
       >
-
         <!-- src/app/estoque/estoque.component.html -->
-<div *ngFor="let item of estoqueItems">
-  <app-item-card [item]="item"></app-item-card>
-</div>
-
+        <div *ngFor="let item of estoqueItems" class="px-6">
+          <app-item-card [item]="item"></app-item-card>
+        </div>
 
         <div
           *ngIf="isModalOpen"

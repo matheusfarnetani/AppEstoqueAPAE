@@ -1,20 +1,17 @@
-<!-- src/app/item-card/item-card.component.html -->
 <div class="item-card">
-    <div>
-      <div style="font-weight: 700">
-        {{ item.nome_insumo }}
-        <span
-          class="item-status ms-2"
-          [class.fechado]="item.status === 0"
-          [class.aberto]="item.status !== 0"
-        >
-          {{ item.status === 0 ? 'Fechado' : 'Aberto' }}
-        </span>
-      </div>
-    </div>
-    <div class="ms-auto text-end">
-      <div>Quantidade: {{ item.quantidade }}x</div>
-      <small>Vencimento: {{ item.data_validade | date: 'dd/MM/yyyy' }}</small>
+  <div>
+    <div style="font-weight: 700">
+      {{ item.nome_insumo }}
+      <span
+        class="item-status ms-2"
+        [ngClass]="getStatusLabel(item.status).class"
+      >
+        {{ getStatusLabel(item.status).label }}
+      </span>
     </div>
   </div>
-  
+  <div class="ms-auto text-end">
+    <div>Quantidade: {{ item.quantidade }}x</div>
+    <small>Vencimento: {{ item.data_validade | date: 'dd/MM/yyyy' }}</small>
+  </div>
+</div>

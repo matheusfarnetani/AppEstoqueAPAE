@@ -8,11 +8,34 @@
     margin-bottom: 10px;
   }
   
-  .item-status.fechado {
-    color: red;
-  }
-  
-  .item-status.aberto {
-    color: green;
-  }
-  
+  /* item-card.component.css */
+.item-status {
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.item-status.fechado {
+  background-color: #4fd966;
+  color: white;
+}
+
+.item-status.aberto {
+  background-color: #ffd000;
+  color: white;
+}
+
+.item-status.consumido {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.item-status.vence-hoje {
+  background-color: #ff0000;
+  color: rgb(255, 255, 255);
+}
+
+.item-status.vencido {
+  background-color: #ff0800;
+  color: white;
+}
