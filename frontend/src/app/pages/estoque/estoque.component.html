@@ -143,13 +143,10 @@
                           <label for="inputUnidadeMedida" class="form-label"
                             >Unidade de Medida</label
                           >
-                          <input
-                            formControlName="unidades_medida_id"
-                            type="text"
-                            class="form-control"
-                            id="inputUnidadeMedida"
-                            placeholder="Informe a Unidade de Medida"
-                          />
+                          <app-fixed-dropdown
+                          (onOptionSelected)="onUnidadeMedidaChange($event)"
+                        ></app-fixed-dropdown>
+                        
                         </div>
                         <div class="col">
                           <label for="inputDataValidade" class="form-label"

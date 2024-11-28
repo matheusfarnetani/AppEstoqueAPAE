@@ -20,6 +20,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CorsInterceptor } from '../cors.interceptor';
 import { ItemCardComponent } from './item-card/item-card.component';
+import { FixedDropdownComponent } from './dropdow/fixed-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ItemCardComponent } from './item-card/item-card.component';
     EstoqueComponent,
     DoacaoComponent,
     AdminuserComponent,
-    ItemCardComponent
+    ItemCardComponent, 
+    FixedDropdownComponent
   ],
   imports: [
     BrowserModule,

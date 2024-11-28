@@ -12,6 +12,13 @@ import { timeInterval, timeout } from 'rxjs';
 })
 
 export class EstoqueComponent implements OnInit {
+
+onUnidadeMedidaChange(selectedValue: string): void {
+  console.log(selectedValue)
+  this.formulario.patchValue({ unidades_medida_id: selectedValue });
+}
+
+
   isModalOpen = false;
   isAddItemModalOpen = false;
   isRemoveItemModalOpen = false;
@@ -35,7 +42,7 @@ quantidade: any;
       insumos_id: ['', Validators.required], // ID do Insumo
       doacoes_id: ['', Validators.required], // ID da Doação
       quantidade: ['', [Validators.required, Validators.min(1)]], // Quantidade
-      unidades_medida_id: ['', Validators.required], // Unidade de Medida
+      unidades_medida_id: ['1', Validators.required], // Unidade de Medida
       data_validade: ['', Validators.required], // Data de Validade
       dataentrada: ['', Validators.required]
     });
