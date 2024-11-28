@@ -42,11 +42,7 @@
           class="w-7 h-7 cursor-pointer"
           (click)="abrirModal()"
         />
-        <img
-          src="assets/Foto.png"
-          alt="profile"
-          class="w-[43px] h-[43px] rounded-full"
-        />
+         
       </div>
     </div>
   </aside>
@@ -56,30 +52,22 @@
       <div class="container mt-4">
         <div class="header-title">QUADRO DE ESTOQUE</div>
 
-        <div class="d-flex justify-content-between mb-5">
-          <div id="btn-acess">
-            <button
-              class="btn btn-primary"
-              style="font-weight: bold"
-              (click)="abrirAddItemModal()"
-            >
-              + Adicionar Item
-            </button>
-            <button
-              class="btn btn-primary"
-              style="font-weight: bold"
-              (click)="abrirRemoveItemModal()"
-            >
-              - Remover Item
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <strong>Filtro</strong>
-            </button>
+        <div class="d-flex justify-end mb-5">
+          <div id="btn-acess w-full flex">
+              <button
+                class="btn btn-primary"
+                style="font-weight: bold"
+                (click)="abrirAddItemModal()"
+              >
+                + Adicionar Item
+              </button>
+              <button
+                class="btn btn-primary"
+                style="font-weight: bold"
+                (click)="abrirRemoveItemModal()"
+              >
+                - Remover Item
+              </button>
 
             <div
               *ngIf="isAddItemModalOpen"
@@ -214,13 +202,14 @@
                   <h3 class="modal-title">REMOVER ITEM</h3>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form [formGroup]="formularioRemove">
                     <div class="row mb-3">
                       <div class="col-md-6">
                         <label for="inputInsumoId" class="form-label"
                           >ID do Insumo</label
                         >
                         <input
+                          formControlName="inputInsumoId"
                           type="text"
                           class="form-control"
                           id="inputInsumoId"
@@ -232,6 +221,7 @@
                           >Quantidade</label
                         >
                         <input
+                          formControlName="inputQuantidade"
                           type="number"
                           class="form-control"
                           id="inputQuantidade"
@@ -245,6 +235,7 @@
                           >Data de Saida</label
                         >
                         <input
+                          formControlName="inputDataSaida"
                           type="date"
                           class="form-control"
                           id="inputDataSaida"
@@ -255,6 +246,7 @@
                           >Unidade de Medida</label
                         >
                         <input
+                          formControlName="inputUnidadeMedida"
                           type="text"
                           class="form-control"
                           id="inputUnidadeMedida"
@@ -267,6 +259,7 @@
                         >Observações</label
                       >
                       <textarea
+                        formControlName="inputObservacoes"
                         class="form-control"
                         id="inputObservacoes"
                         rows="3"
@@ -277,13 +270,21 @@
                 <div class="modal-footer justify-content-center">
                   <button
                     type="button"
-                    class="btn btn-danger"
+                    class="btn btn-success"
                     data-bs-dismiss="modal"
                     (click)="fecharRemoveItemModal()"
                   >
                     VOLTAR
                   </button>
-                  <!-- <button type="submit" class="btn btn-success" id="save" (click)="confirmarRemoveItem()">SALVAR</button> -->
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    id="remove"
+                    (click)="confirmarRemoveItem()"
+                    [disabled]="formularioRemove.invalid"
+                  >
+                    Remover
+                  </button>
                 </div>
               </div>
             </div>
@@ -333,15 +334,9 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <span id="result">Foram achados <strong>9</strong> itens</span>
-        <div id="filter">
-          <p *ngIf="!filtroSelecionado">Nenhum filtro aplicado</p>
-          <p *ngIf="filtroSelecionado">
-            Filtra por:
-            <a class="text-decoration-none">{{ filtroSelecionado }}</a>
-          </p>
-        </div>
+      <div class="d-flex justify-start align-items-center mb-2 pl-6">
+        <span>Foram achados<strong  class="text-green-500">{{quantidade}}</strong> itens</span>
+       
       </div>
 
       <div

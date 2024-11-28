@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EstoqueService } from './estoque.service';
 import { ItemEstoque } from './item-estoque';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { timeInterval, timeout } from 'rxjs';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class EstoqueComponent implements OnInit {
   isConfirmAddModal = false;
   isConfirmRemoveModal = false;
   name: string = 'name';
+  formularioRemove!: FormGroup;
+quantidade: any;
 
   constructor(private estoqueService: EstoqueService, private fb: FormBuilder) { }
 
@@ -37,14 +40,24 @@ export class EstoqueComponent implements OnInit {
       dataentrada: ['', Validators.required]
     });
 
-    this.getEstoqueItems();
+    this.formularioRemove = this.fb.group({
+      inputInsumoId: ['', Validators.required],
+      inputQuantidade: ['', [Validators.required, Validators.min(1)]],
+      inputDataSaida: ['', Validators.required],
+      inputUnidadeMedida: ['', Validators.required],
+      inputObservacoes: ['']
+    });
     
+
+    this.getEstoqueItems();
+
   }
 
   getEstoqueItems(): void {
     this.estoqueService.getItens().subscribe(
       (itens) => {
         this.estoqueItems = itens.estoque;
+        this.quantidade = itens.estoque.length
         console.log(itens)
       },
       (error) => {
@@ -73,6 +86,9 @@ export class EstoqueComponent implements OnInit {
           this.formulario.reset(); // Reseta o formulário
           this.fecharAddItemModal(); // Fecha o modal
           this.isConfirmAddModal = true; // Exibe mensagem de sucesso
+          setTimeout(() => {
+            this.isConfirmAddModal = false;
+        }, 500);
         },
         (error) => {
           console.error('Erro ao adicionar item:', error);
@@ -83,11 +99,13 @@ export class EstoqueComponent implements OnInit {
       alert('Por favor, preencha todos os campos obrigatórios.');
     }
   }
-
-  confirmarRemoveItem(item: ItemEstoque) {
-    this.itemParaRemover = item; // Define o item a ser removido
-    this.abrirRemoveItemModal();  // Abre o modal de confirmação
-  }
+  confirmarRemoveItem() {
+    this.fecharRemoveItemModal()  // Abre o modal de confirmação
+    this.isConfirmRemoveModal = true
+    setTimeout(() => {
+      this.isConfirmRemoveModal = false;
+  }, 500);
+    }
 
   abrirModal() {
     this.isModalOpen = true;
@@ -115,32 +133,7 @@ export class EstoqueComponent implements OnInit {
   }
 
   removerItemDoEstoque() {
-    if (this.itemParaRemover) {
-      this.estoqueService.deleteItem(this.itemParaRemover.id).subscribe(
-        () => {
-          console.log('Item removido com sucesso!');
-          this.getEstoqueItems(); // Atualiza a lista após a remoção
-          this.fecharRemoveItemModal();
-          this.itemParaRemover = null; // Limpa a variável
-        },
-        (error) => {
-          console.error('Erro ao remover item:', error);
-          // Lide com o erro de forma apropriada
-        }
-      );
-    }
+    this.fecharRemoveItemModal();
   }
-
-  getFilteredItems(): ItemEstoque[] {
-    if (!this.pesquisa || !this.filtroSelecionado) {
-      return this.estoqueItems;
-    }
-    const pesquisaLower = this.pesquisa.toLowerCase();
-    return this.estoqueItems.filter(item => {
-      const fieldValue = (item as any)[this.filtroSelecionado]?.toString().toLowerCase();
-      return fieldValue.includes(pesquisaLower);
-    });
-  }
-
 
 }

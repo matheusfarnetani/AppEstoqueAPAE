@@ -42,29 +42,29 @@
           class="w-7 h-7 cursor-pointer"
           (click)="abrirModal()"
         />
-        <img
-          src="assets/Foto.png"
-          alt="profile"
-          class="w-[43px] h-[43px] rounded-full"
-        />
+        
       </div>
     </div>
   </aside>
   <main class="flex justify-center items-center h-screen w-10/12 ">
     <div id="white" class="w-9/12 py-4">
       <div
-        class="form-title"
-        style="
-          color: #2a455a;
-          margin-bottom: 1.3rem;
-          font-size: 2.1rem;
-          font-weight: bold;
-          margin-top: 25px;
-        "
-      >
-        CADASTRO DE USUARIO
-        <img routerLink="/admin" src="assets/exchange.png" alt="" id="change" />
-      </div>
+      class="form-title flex items-center text-center gap-3"
+      style="
+        color: #2a455a;
+        margin-bottom: 1.3rem;
+        font-size: 2.1rem;
+        font-weight: bold;
+      "
+    >
+      CADASTRO DE USUARIO
+      <img
+        routerLink="/admin"
+        src="assets/exchange.png"
+        alt=""
+        class="w-7"
+      />
+    </div>
       <div class="container-form">
         <form [formGroup]="formulario" method="POST" class="flex flex-col justify-center items-center w-full">
           <div class="row mb-3 w-9/12 justify-center">
@@ -131,16 +131,7 @@
                   placeholder="Digite seu telefone"
                 />
               </div>
-              <div class="mb-3">
-                <label for="cpfCnpj" class="form-label">CPF</label>
-                <input
-                  formControlName="cpf"
-                  type="text"
-                  class="form-control"
-                  id="cpfCnpj"
-                  placeholder="Digite seu CPF"
-                />
-              </div>
+              
             </div>
           </div>
           <button
