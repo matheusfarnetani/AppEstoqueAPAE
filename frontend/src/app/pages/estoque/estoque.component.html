@@ -1,245 +1,401 @@
 <body>
-    <aside>
-      <div class="sidenav">
-        <img routerLink="/home" src="assets/logo-apae.png" alt="logo-apae" id="logo-aside">
-        <button routerLink="/admin"   type="button" class="btn btn-dark" data-bs-toggle="button">ADMINISTRAÇÃO</button>
-        <button routerLink="/estoque"  type="button" class="btn btn-dark" data-bs-toggle="button">ESTOQUE</button>
-        <button routerLink="/doacao"  type="button" class="btn btn-dark" data-bs-toggle="button">DOAÇÃO</button>
-        <div class="line">
-          <p id="name"><strong>Leticia Campos</strong></p>
-          <p id="job">Nutricionista</p>
-          <img (click)="abrirModal()" src="assets/sair.png" alt="" id="out">
-          <img src="assets/Foto.png" alt="p" id="profile"/>
-        </div>
-      </div>
-    </aside>
-  
-    <main>
-      <div id="white">
-        <div class="container mt-4">
-          <div class="header-title">QUADRO DE ESTOQUE</div>
+  <aside
+    class="fixed top-0 left-0 w-fit h-100 bg-[#2A455A] flex flex-col items-center justify-center px-3 border-r-[1px] border-[#FFFFFF20]"
+  >
+    <img
+      routerLink="/home"
+      src="assets/logo-apae.png"
+      alt="logo-apae"
+      class="w-[95px] h-[133px] mb-4"
+    />
 
-          <div class="d-flex justify-content-between mb-5">
-            <div class="input-group" style="width: 30%;">
-              <span class="input-group-text">
-                <i class="bi bi-search"></i>
-              </span>
-              <input type="text" class="form-control" placeholder="Procure pelo item desejado">
-            </div>
+    <button
+      class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300"
+      routerLink="/admin"
+    >
+      ADMINISTRAÇÃO
+    </button>
 
-            <div id="btn-acess">
-              <button class="btn btn-primary" style="font-weight: bold;" (click)="abrirAddItemModal()">+ Adicionar Item</button>
-              <button class="btn btn-primary" style="font-weight: bold;" (click)="abrirRemoveItemModal()">- Remover Item</button>
-              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><strong>Filtro</strong></button>
-              <ul class="dropdown-menu" style="text-align: center; cursor: pointer;">
-                <li><a class="dropdown-item" (click)="selecionarFiltro('')">Sem Filtro</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" (click)="selecionarFiltro('Produto')">Produto</a></li>
-                <li><a class="dropdown-item" (click)="selecionarFiltro('Data')">Data</a></li>
-                <li><a class="dropdown-item" (click)="selecionarFiltro('Quantidade')">Quantidade</a></li>
-                <li><a class="dropdown-item" (click)="selecionarFiltro('Status')">Status</a></li>
-              </ul>
+    <button
+      class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300"
+      routerLink="/estoque"
+    >
+      ESTOQUE
+    </button>
 
-        <div *ngIf="isAddItemModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-              <div class="modal-header justify-content-center">
-                <h3 class="modal-title">NOVO ITEM</h3>
-              </div>
-            <div class="modal-body">
-                <form [formGroup]="formulario" method="POST" class="formLogin">
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="inputInsumoId" class="form-label">ID do Insumo</label>
-                            <input formControlName="idcons" type="text" class="form-control" id="inputInsumoId" placeholder="Insira o ID do Insumo">
-                        </div>
-                        <div class="col">
-                            <label for="inputDoacaoId" class="form-label">ID da Doação</label>
-                            <input formControlName="iddoacao" type="text" class="form-control" id="inputDoacaoId" placeholder="Insira o ID da Doação">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="inputQuantidade" class="form-label">Quantidade</label>
-                            <input formControlName="quant" type="number" class="form-control" id="inputQuantidade" placeholder="Insira a Quantidade">
-                        </div>
-                        <div class="col">
-                            <label for="inputDataEntrada" class="form-label">Data de Entrada</label>
-                            <input formControlName="dataentrada" type="date" class="form-control" id="inputDataEntrada">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <label for="inputUnidadeMedida" class="form-label">Unidade de Medida</label>
-                            <input formControlName="unidade" type="text" class="form-control" id="inputUnidadeMedida" placeholder="Informe a Unidade de Medida">
-                        </div>
-                        <div class="col">
-                            <label for="inputDataValidade" class="form-label">Data de Validade</label>
-                            <input formControlName="dataval" type="date" class="form-control" id="inputDataValidade">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="fecharAddItemModal()">VOLTAR</button>
-                <button type="submit" class="btn btn-success" id="save" (click)="confirmarAddItem()" [disabled]="formulario.invalid">SALVAR</button>
-            </div>
-          </div>
-        </div>
+    <button
+      class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300"
+      routerLink="/doacao"
+    >
+      DOAÇÃO
+    </button>
+
+    <div
+      class="w-full border-t border-white mt-10 px-5 flex flex-col items-center"
+    >
+      <p class="text-white text-sm mt-5 font-bold">{{ name }}</p>
+      <p class="text-white text-xs">Nutricionista</p>
+      <div class="flex items-center gap-4 mt-4">
+        <img
+          src="assets/sair.png"
+          alt="logout"
+          class="w-7 h-7 cursor-pointer"
+          (click)="abrirModal()"
+        />
+        <img
+          src="assets/Foto.png"
+          alt="profile"
+          class="w-[43px] h-[43px] rounded-full"
+        />
       </div>
     </div>
+  </aside>
 
+  <main>
+    <div id="white">
+      <div class="container mt-4">
+        <div class="header-title">QUADRO DE ESTOQUE</div>
 
-      <div *ngIf="isRemoveItemModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header justify-content-center">
-              <h3 class="modal-title">REMOVER ITEM</h3>
-            </div>
-          <div class="modal-body">
-            <form>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="inputInsumoId" class="form-label">ID do Insumo</label>
-                  <input type="text" class="form-control" id="inputInsumoId" placeholder="Insira o ID de consumo">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputQuantidade" class="form-label">Quantidade</label>
-                  <input type="number" class="form-control" id="inputQuantidade" placeholder="Insira a quantidade">
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="inputDataSaida" class="form-label">Data de Saida</label>
-                  <input type="date" class="form-control" id="inputDataSaida">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputUnidadeMedida" class="form-label">Unidade de Medida</label>
-                  <input type="text" class="form-control" id="inputUnidadeMedida" placeholder="Informe a Unidade de Medida">
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="inputObservacoes" class="form-label">Observações</label>
-                <textarea class="form-control" id="inputObservacoes" rows="3"></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer justify-content-center">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="fecharRemoveItemModal()">VOLTAR</button>
-              <button type="submit" class="btn btn-success" id="save" (click)="confirmarRemoveItem()">SALVAR</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="d-flex justify-content-between mb-5">
+          <div id="btn-acess">
+            <button
+              class="btn btn-primary"
+              style="font-weight: bold"
+              (click)="abrirAddItemModal()"
+            >
+              + Adicionar Item
+            </button>
+            <button
+              class="btn btn-primary"
+              style="font-weight: bold"
+              (click)="abrirRemoveItemModal()"
+            >
+              - Remover Item
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <strong>Filtro</strong>
+            </button>
 
-  <div *ngIf="isConfirmAddModal" class="modal show d-block"  tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-      <div class="modal-content text-center">
-        <div class="modal-body">
-          <h5 class="modal-title mb-3">Item cadastrado com sucesso!</h5>
-          <img src="assets/circle-check.png" alt="Ícone de confirmação" style="width: 60px; margin-top: 10px;">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="isConfirmRemoveModal" class="modal show d-block"  tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-      <div class="modal-content text-center">
-        <div class="modal-body">
-          <h5 class="modal-title mb-3">Item removido com sucesso!</h5>
-          <img src="assets/circle-check.png" alt="Ícone de confirmação" style="width: 60px; margin-top: 10px;">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <span id="result">Foram achados <strong>9</strong> itens</span>
-            <div id="filter">
-              <p *ngIf="!filtroSelecionado" >Nenhum filtro aplicado</p>
-              <p *ngIf="filtroSelecionado">Filtra por: <a class="text-decoration-none">{{ filtroSelecionado }}</a></p>
-            </div>
-          </div>
-          
-          <div id="item-list" style="width: 100%; overflow-y: scroll; max-height: 300px;">
-            <div class="item-card active">
-              <div>
-                <div style="font-weight: 700;">Arroz <span class="item-status aberto ms-2">Aberto</span></div>
-              </div>
-              <div class="ms-auto text-end">
-                <div>Quantidade: 4x</div>
-                <small>Vencimento: 19/10/2024</small>
-              </div>
-            </div>
-  
-            <div class="item-card">
-              <div>
-                <div style="font-weight: 700;">Cenoura <span class="item-status fechado ms-2">Fechado</span></div>
-              </div>
-              <div class="ms-auto text-end">
-                <div>Quantidade: 19x</div>
-                <small>Vencimento: 12/12/2024</small>
-              </div>
-            </div>
-
-            <div class="item-card">
-              <div>
-                <div style="font-weight: 700;">Batata<span class="item-status aberto ms-2">Fechado</span></div>
-              </div>
-              <div class="ms-auto text-end">
-                <div>Quantidade: 29x</div>
-                <small>Vencimento: 18/11/2024</small>
-              </div>
-            </div>
-
-            <div class="item-card">
-              <div>
-                <div style="font-weight: 700;">Bolacha<span class="item-status fechado ms-2">Fechado</span></div>
-              </div>
-              <div class="ms-auto text-end">
-                <div>Quantidade: 5x</div>
-                <small>Vencimento: 25/01/2025</small>
-              </div>
-            </div>
-
-            <div class="item-card">
-              <div>
-                <div style="font-weight: 700;">Carne Vermelha <span class="item-status fechado ms-2">Fechado</span></div>
-              </div>
-              <div class="ms-auto text-end">
-                <div>Quantidade: 3x</div>
-                <small>Vencimento: 25/11/2024</small>
-              </div>
-            </div>
-  
-            <div class="item-card"><div>
-                <div style="font-weight: 700;">Peixe <span class="item-status aberto ms-2">Aberto</span></div>
-              </div>
-              <div class="ms-auto text-end">
-                <div>Quantidade: 10x</div>
-                <small>Vencimento: 15/09/2024</small>
-              </div>
-            </div>
-
-            <div *ngIf="isModalOpen" class="modal show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-              <div class="modal-dialog modal-dialog-centered" role="document">
+            <div
+              *ngIf="isAddItemModalOpen"
+              class="modal show d-block"
+              tabindex="-1"
+              role="dialog"
+              style="background: rgba(0, 0, 0, 0.5)"
+            >
+              <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
-                  <div class="modal-body text-center">
-                    <h5>Atenção, você está saindo da sua conta, deseja realmente continuar?</h5>
+                  <div class="modal-header justify-content-center">
+                    <h3 class="modal-title">NOVO ITEM</h3>
                   </div>
-                  <div class="modal-footer d-flex justify-content-center">
-                    <button routerLink="/" type="button" class="btn btn-success" style="margin-right: 35px;" id="green">Sim, desejo sair</button>
-                    <button type="button" class="btn btn-danger" (click)="fecharModal()" id="red">Não, desejo ficar</button>
+                  <div class="modal-body">
+                    <form
+                      [formGroup]="formulario"
+                      method="POST"
+                      class="formLogin"
+                    >
+                      <div class="row mb-3">
+                        <div class="col">
+                          <label for="inputInsumoId" class="form-label"
+                            >ID do Insumo</label
+                          >
+                          <input
+                            formControlName="insumos_id"
+                            type="text"
+                            class="form-control"
+                            id="inputInsumoId"
+                            placeholder="Insira o ID do Insumo"
+                          />
+                        </div>
+                        <div class="col">
+                          <label for="inputDoacaoId" class="form-label"
+                            >ID da Doação</label
+                          >
+                          <input
+                            formControlName="doacoes_id"
+                            type="text"
+                            class="form-control"
+                            id="inputDoacaoId"
+                            placeholder="Insira o ID da Doação"
+                          />
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col">
+                          <label for="quantidade" class="form-label"
+                            >Quantidade</label
+                          >
+                          <input
+                            formControlName="quantidade"
+                            type="number"
+                            class="form-control"
+                            id="inputQuantidade"
+                            placeholder="Insira a Quantidade"
+                          />
+                        </div>
+                        <div class="col">
+                          <label for="inputDataEntrada" class="form-label"
+                            >Data de Entrada</label
+                          >
+                          <input
+                            formControlName="dataentrada"
+                            type="date"
+                            class="form-control"
+                            id="inputDataEntrada"
+                          />
+                        </div>
+                      </div>
+                      <div class="row mb-4">
+                        <div class="col">
+                          <label for="inputUnidadeMedida" class="form-label"
+                            >Unidade de Medida</label
+                          >
+                          <input
+                            formControlName="unidades_medida_id"
+                            type="text"
+                            class="form-control"
+                            id="inputUnidadeMedida"
+                            placeholder="Informe a Unidade de Medida"
+                          />
+                        </div>
+                        <div class="col">
+                          <label for="inputDataValidade" class="form-label"
+                            >Data de Validade</label
+                          >
+                          <input
+                            formControlName="data_validade"
+                            type="date"
+                            class="form-control"
+                            id="inputDataValidade"
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-bs-dismiss="modal"
+                      (click)="fecharAddItemModal()"
+                    >
+                      VOLTAR
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-success"
+                      id="save"
+                      (click)="confirmarAddItem()"
+                      [disabled]="formulario.invalid"
+                    >
+                      SALVAR
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-    </main>
-  </body>
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+          <div
+            *ngIf="isRemoveItemModalOpen"
+            class="modal show d-block"
+            tabindex="-1"
+            role="dialog"
+            style="background: rgba(0, 0, 0, 0.5)"
+          >
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                  <h3 class="modal-title">REMOVER ITEM</h3>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <label for="inputInsumoId" class="form-label"
+                          >ID do Insumo</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inputInsumoId"
+                          placeholder="Insira o ID de consumo"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputQuantidade" class="form-label"
+                          >Quantidade</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="inputQuantidade"
+                          placeholder="Insira a quantidade"
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <label for="inputDataSaida" class="form-label"
+                          >Data de Saida</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="inputDataSaida"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputUnidadeMedida" class="form-label"
+                          >Unidade de Medida</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inputUnidadeMedida"
+                          placeholder="Informe a Unidade de Medida"
+                        />
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="inputObservacoes" class="form-label"
+                        >Observações</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="inputObservacoes"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                    (click)="fecharRemoveItemModal()"
+                  >
+                    VOLTAR
+                  </button>
+                  <!-- <button type="submit" class="btn btn-success" id="save" (click)="confirmarRemoveItem()">SALVAR</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="isConfirmAddModal"
+          class="modal show d-block"
+          tabindex="-1"
+          role="dialog"
+          style="background: rgba(0, 0, 0, 0.5)"
+        >
+          <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content text-center">
+              <div class="modal-body">
+                <h5 class="modal-title mb-3">Item cadastrado com sucesso!</h5>
+                <img
+                  src="assets/circle-check.png"
+                  alt="Ícone de confirmação"
+                  style="width: 60px; margin-top: 10px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="isConfirmRemoveModal"
+          class="modal show d-block"
+          tabindex="-1"
+          role="dialog"
+          style="background: rgba(0, 0, 0, 0.5)"
+        >
+          <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content text-center">
+              <div class="modal-body">
+                <h5 class="modal-title mb-3">Item removido com sucesso!</h5>
+                <img
+                  src="assets/circle-check.png"
+                  alt="Ícone de confirmação"
+                  style="width: 60px; margin-top: 10px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span id="result">Foram achados <strong>9</strong> itens</span>
+        <div id="filter">
+          <p *ngIf="!filtroSelecionado">Nenhum filtro aplicado</p>
+          <p *ngIf="filtroSelecionado">
+            Filtra por:
+            <a class="text-decoration-none">{{ filtroSelecionado }}</a>
+          </p>
+        </div>
+      </div>
+
+      <div
+        id="item-list"
+        style="width: 100%; overflow-y: scroll; max-height: 300px"
+      >
+        <!-- src/app/estoque/estoque.component.html -->
+        <div *ngFor="let item of estoqueItems" class="px-6">
+          <app-item-card [item]="item"></app-item-card>
+        </div>
+
+        <div
+          *ngIf="isModalOpen"
+          class="modal show d-block"
+          tabindex="-1"
+          role="dialog"
+          style="background: rgba(0, 0, 0, 0.5)"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <h5>
+                  Atenção, você está saindo da sua conta, deseja realmente
+                  continuar?
+                </h5>
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                <button
+                  routerLink="/"
+                  type="button"
+                  class="btn btn-success"
+                  style="margin-right: 35px"
+                  id="green"
+                >
+                  Sim, desejo sair
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="fecharModal()"
+                  id="red"
+                >
+                  Não, desejo ficar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+  rel="stylesheet"
+/>

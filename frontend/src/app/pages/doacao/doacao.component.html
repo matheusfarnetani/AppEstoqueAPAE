@@ -1,19 +1,29 @@
 <body>
-    <aside>
-      <div class="sidenav">
-        <img routerLink="/home" src="assets/logo-apae.png" alt="logo-apae" id="logo-aside" />
-        <button routerLink="/admin" type="button" class="btn btn-dark" data-bs-toggle="button"> ADMINISTRAÇÃO</button>
-        <button routerLink="/estoque" type="button" class="btn btn-dark" data-bs-toggle="button">ESTOQUE</button>
-        <button routerLink="doacao" type="button" class="btn btn-dark" data-bs-toggle="button"> DOAÇÃO</button>
-        <div class="line">
-          <p id="name"><strong>Leticia Campos</strong></p>
-          <p id="job">Nutricionista</p>
-          <img (click)="abrirModal()  "src="assets/sair.png" alt="" id="out" />
-          <img src="assets/Foto.png" alt="p" id="profile" />
-        </div>
+  <aside class="fixed top-0 left-0 w-fit h-100 bg-[#2A455A] flex flex-col items-center justify-center px-3 border-r-[1px] border-[#FFFFFF20]">
+    <img  routerLink="/home" src="assets/logo-apae.png" alt="logo-apae" class="w-[95px] h-[133px] mb-4">
+    
+    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/admin">
+      ADMINISTRAÇÃO
+    </button>
+    
+    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/estoque">
+      ESTOQUE
+    </button>
+    
+    <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/doacao">
+      DOAÇÃO
+    </button>
+    
+    <div class="w-full border-t border-white mt-10 px-5 flex flex-col items-center">
+      <p class="text-white text-sm mt-5 font-bold">{{name}}</p>
+      <p class="text-white text-xs">Nutricionista</p>
+      <div class="flex items-center gap-4 mt-4">
+        <img src="assets/sair.png" alt="logout" class="w-7 h-7 cursor-pointer" (click)="abrirModal()">
+        <img src="assets/Foto.png" alt="profile" class="w-[43px] h-[43px] rounded-full">
       </div>
-    </aside>
-  
+    </div>
+  </aside>
+
   
     <main>
       <div id="white">

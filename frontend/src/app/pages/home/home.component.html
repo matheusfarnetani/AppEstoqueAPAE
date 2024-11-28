@@ -1,6 +1,7 @@
 <body class="bg-[#2A455A] h-screen">
-  <aside class="fixed top-0 left-0 w-fit h-100 bg-[#2A455A] flex flex-col items-center justify-center px-3">
-    <img src="assets/logo-apae.png" alt="logo-apae" class="w-[95px] h-[133px] mb-4">
+  <aside class="fixed top-0 left-0 w-fit h-100 bg-[#2A455A] flex flex-col items-center justify-center px-3 ">
+    
+    <img  src="assets/logo-apae.png" alt="logo-apae" class="w-[95px] h-[133px] mb-4">
     
     <button class="w-[190px] h-[50px] mt-6 bg-[#2A455A] border-none rounded-lg text-white text-lg hover:bg-[#d4d4d444] transition duration-300" routerLink="/admin">
       ADMINISTRAÇÃO
@@ -15,7 +16,7 @@
     </button>
     
     <div class="w-full border-t border-white mt-10 px-5 flex flex-col items-center">
-      <p class="text-white text-sm mt-5 font-bold">Leticia Campos</p>
+      <p class="text-white text-sm mt-5 font-bold">{{name}}</p>
       <p class="text-white text-xs">Nutricionista</p>
       <div class="flex items-center gap-4 mt-4">
         <img src="assets/sair.png" alt="logout" class="w-7 h-7 cursor-pointer" (click)="abrirModal()">
@@ -24,8 +25,8 @@
     </div>
   </aside>
   
-  <main class="flex flex-col items-center justify-center h-5/6 bg-[#F8F8F8] text-center px-8">
-    <h1 class="text-5xl font-bold">BOM DIA, <br>LETICIA CAMPOS!</h1>
+  <main class="flex flex-col items-center justify-center bg-[#F8F8F8] text-center px-8 h-screen border-y-[40px] border-[#2A455A]">
+    <h1 class="text-5xl font-bold">BOM DIA, <p *ngIf="name">{{ name }}</p></h1>
     <img src="assets/logo-apae.png" alt="principal logo" class="w-[185px] h-[265px] mt-8">
   </main>
   

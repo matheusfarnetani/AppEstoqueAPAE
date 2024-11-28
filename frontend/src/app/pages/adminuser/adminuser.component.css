@@ -13,12 +13,6 @@ label{
 
 #white {
     background-color: #F8F8F8;
-    width: 1080px;
-    height: 622px;
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    transform: translate(-39%, -50%);
     display: flex;
     justify-items: center;
     align-items: center;
@@ -68,7 +62,6 @@ label{
     font-weight: bold;
     border-radius: 5px;
     margin-top: 5.2rem;
-    margin-left: 19.2rem;
 }
 
 .form-label{

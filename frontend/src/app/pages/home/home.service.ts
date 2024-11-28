@@ -1,5 +1,5 @@
 // auth.service.ts
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -8,25 +8,25 @@ import { environment } from '../../../environments/enviroments'
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-    
-  private endPoint = `${environment.apiUrl}/api/users/login`;
+export class HomeSerevice {
 
-  constructor(private http: HttpClient) { }
+  private endPoint = `${environment.apiUrl}/api/users/` + localStorage.getItem('user');
 
+  constructor(private http: HttpClient) {}
 
-
-  login(email: string, password: string): Observable<any> {
-    const body = { email, password };
+  getName(): Observable<any> {
+    const token = localStorage.getItem('authToken')
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     });
 
-    return this.http.post(this.endPoint, body, { headers }).pipe(
+    return this.http.get(this.endPoint, { headers }).pipe( 
       catchError((error) => {
         console.error('Login error:', error);
         return throwError(() => new Error(error.error?.message || 'Server Error'));
       })
     );
-  }
+
+}
 }

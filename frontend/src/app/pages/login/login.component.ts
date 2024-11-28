@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   formulario: FormGroup;
+  erroMensagem: string = '';
+
+  private tokenKey = 'authToken'; // Chave para armazenar o token no localStorage
 
   constructor(private authService: AuthService, private router: Router) {
     this.formulario = new FormGroup({
@@ -29,12 +32,31 @@ export class LoginComponent {
       this.authService.login(email, senha).subscribe({
         next: (response) => {
           // Sucesso no login, redireciona para a página principal
+          if (response.token) {
+          this.setToken(response.token); // Salva o token
+          this.setUser(response.id) 
+          localStorage.setItem('userName', response.username)
+
+
+        }
+        
+          this.erroMensagem = '';
           this.router.navigate(['/home']);
         },
         error: (err) => {
-          console.error('Erro no login', err);
+          this.erroMensagem = err.message || 'Ocorreu um erro inesperado.';
         }
       });
     }
   }
+
+  setToken(token: any) {
+    localStorage.setItem(this.tokenKey, token);  
+}
+
+setUser(obj: any){
+  localStorage.setItem('user', obj)
+}
+
+
 }

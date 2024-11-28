@@ -16,12 +16,15 @@
         class="w-100 p-3 text-md border border-gray-300 rounded-lg mb-3 focus:outline-none focus:border-green-500 transition-all duration-150"
       />
       
-      <p
-        *ngIf="formulario.get('email')?.hasError('email') && formulario.get('email')?.touched"
+      <ng-container *ngIf="formulario.get('email')?.hasError('email') && formulario.get('email')?.touched">
+        <p
+        
         class="w-100 p-2 mx-auto text-center font-bold bg-red-200 text-red-800 rounded"
       >
         O campo precisa conter  "&#64;"
       </p>
+      </ng-container>
+    
 
       <input
         formControlName="senha"
@@ -29,6 +32,19 @@
         placeholder="Digite sua senha"
         class="w-100 p-3 text-md border border-gray-300 rounded-lg mb-3 focus:outline-none focus:border-green-500 transition-all duration-150"
       />
+      
+        <p  *ngIf="formulario.get('senha')?.hasError('senha') && formulario.get('senha')?.touched"
+        class="w-100 p-2 mx-auto text-center font-bold bg-red-200 text-red-800 rounded"
+      >
+        O campo precisa conter  "&#64;"
+      </p>
+
+        <p
+    *ngIf="erroMensagem"
+    class="w-100 p-2 mx-auto text-center font-bold bg-red-200 text-red-800 rounded mb-3"
+  >
+    {{ erroMensagem }}
+    </p>
 
       <button
         type="submit"
